@@ -39,7 +39,7 @@ const IncreaseFonts = ({ setFontSize, fontSize, handleChange }) => {
           onClick={increaseFontSize}
           style={{
             padding: '5px',
-            backgroundColor: '#28a745',
+            backgroundColor: '#007bff',
             color: 'white',
             border: 'none',
             borderRadius: '4px',

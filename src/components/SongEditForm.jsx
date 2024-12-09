@@ -93,8 +93,35 @@ export const SongEditForm = ({
         {scrollSpeed}x
       </div>
       <div>
-        <button type='submit'>Guardar Cambios</button>
-        <button onClick={() => setIsEditOpen(false)}>Cancelar</button>
+        <button
+          type='submit'
+          style={{
+            padding: '10px 15px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            marginTop: '10px',
+            marginRight: '10px',
+          }}
+        >
+          Guardar Cambios
+        </button>
+        <button
+          style={{
+            padding: '10px 15px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            marginTop: '10px',
+          }}
+          onClick={() => setIsEditOpen(false)}
+        >
+          Cancelar
+        </button>
       </div>
     </form>
   );

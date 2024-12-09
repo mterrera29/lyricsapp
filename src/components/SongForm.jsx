@@ -169,7 +169,19 @@ function SongForm({ onCloseModal }) {
 
       {/* Tamaño de la fuente */}
 
-      <button type='submit' disabled={isSubmitting}>
+      <button
+        type='submit'
+        disabled={isSubmitting}
+        style={{
+          padding: '10px 15px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          marginTop: '10px',
+        }}
+      >
         {isSubmitting ? 'Creando...' : 'Crear'}
       </button>
     </form>

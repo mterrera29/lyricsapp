@@ -79,7 +79,7 @@ const ScrollBar = ({
         onClick={isScrolling ? stopScrolling : startScrolling}
         style={{
           padding: '10px 15px',
-          backgroundColor: isScrolling ? '#dc3545' : '#28a745',
+          backgroundColor: isScrolling ? '#dc3545' : '#007bff',
           color: 'white',
           border: 'none',
           borderRadius: '4px',
@@ -115,7 +115,7 @@ const ScrollBar = ({
         onClick={handleSubmit}
         style={{
           padding: '5px',
-          backgroundColor: '#28a745',
+          backgroundColor: '#007bff',
           color: 'white',
           border: 'none',
           borderRadius: '4px',

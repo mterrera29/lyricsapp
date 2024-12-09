@@ -19,7 +19,7 @@
   position: relative; /* Se establece el contenedor en posición relativa para que los elementos internos puedan ser posicionados de forma absoluta */
   top: 0;
   left: 0;
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
   padding: 10px 20px;
   display: flex;
@@ -27,7 +27,7 @@
   justify-content: center; /* Asegura que los elementos estén centrados horizontalmente */
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 2px solid #3a8c40;
+  border-bottom: 2px solid #0053ac;
   height: 50px; /* Establecer una altura fija para el header */
 }
 
@@ -87,7 +87,7 @@
   left: -100%; /* Inicialmente fuera de la pantalla */
   width: 25%;
   height: 100%;
-  background-color: #333;
+  background-color: #0353a8;
   color: white;
   transition: left 0.3s ease; /* Animación para deslizar desde la izquierda */
   padding: 20px;
@@ -156,6 +156,13 @@
   animation: spin 1s linear infinite;
 }
 
+input{
+  font-size: 16px;
+}
+
+select{
+  font-size: 16px;
+}
 
 
 @keyframes spin {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { getDocs, collection, onSnapshot } from 'firebase/firestore'; // Importar Firestore desde Firebase v9
 import { db } from './components/firebase';
 import SongDetailsPage from './components/SongDetailsPage';
@@ -11,6 +11,7 @@ function App() {
   const [songs, setSongs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'light');
   }, []);
@@ -69,7 +70,15 @@ function App() {
           <nav>
             <ul>
               <li>
-                <a href='#'>Inicio</a>
+                <a
+                  href='#'
+                  onClick={() => {
+                    toggleMenu();
+                    navigate('/');
+                  }}
+                >
+                  Inicio
+                </a>
               </li>
               <li>
                 <a href='#'>Servicios</a>
@@ -84,7 +93,14 @@ function App() {
           </nav>
         </div>
         <div className='title-container'>
-          <h2 className='title'>Lyrics App</h2>
+          <h2
+            className='title'
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            Lyrics App
+          </h2>
         </div>
       </div>
       <div className='mainApp'>

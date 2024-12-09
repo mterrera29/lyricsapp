@@ -20,7 +20,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 90%; /* Ancho del modal ajustable */
+  width: 95%; /* Ancho del modal ajustable */
   max-width: 500px;
   text-align: center;
   max-height: 90vh; /* Límite máximo de altura */
@@ -37,7 +37,7 @@
   font-weight: bold; /* Peso de fuente más fuerte */
   cursor: pointer; /* Cursor de mano */
   position: absolute;
-  top: 15px; /* Distancia desde la parte superior */
+  top: -5px; /* Distancia desde la parte superior */
   right: 15px; /* Distancia desde la derecha */
   padding: 5px; /* Espaciado alrededor del icono */
   transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
