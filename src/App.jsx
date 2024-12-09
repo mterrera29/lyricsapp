@@ -11,6 +11,9 @@ function App() {
   const [songs, setSongs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
