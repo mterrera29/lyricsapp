@@ -93,7 +93,7 @@
 /* Media query para pantallas muy pequeñas (por ejemplo, < 480px) */
 @media (max-width: 480px) {
   .scroll-speed-slider {
-    width: 120px; /* Ajuste adicional para pantallas muy pequeñas */
+    width: 90px; /* Ajuste adicional para pantallas muy pequeñas */
   }
 
   .scroll-speed-slider::-webkit-slider-thumb,

@@ -68,6 +68,7 @@ function SongDetailsPage() {
       setSong(updatedSong); // Actualiza el estado principal
       setEditedSong(updatedSong);
       setIsEditOpen(false);
+      console.log('guardado');
     } catch (error) {
       console.error('Error al guardar los cambios:', error);
     }
@@ -87,7 +88,13 @@ function SongDetailsPage() {
 
   return (
     <div style={{ padding: '0px', paddingLeft: '0px', paddingRight: '0px' }}>
-      <ScrollBar setFontSize={setFontSize} song={editedSong || song} />
+      <ScrollBar
+        setFontSize={setFontSize}
+        song={editedSong || song}
+        fontSize={fontSize}
+        handleChange={handleChange}
+        handleSaveEdit={handleSaveEdit}
+      />
       <h2 style={{ margin: '0' }}>{song.title}</h2>
       <h3 style={{ margin: '0' }}>Por: {song.artist}</h3>
       <p style={{ margin: '0' }}>

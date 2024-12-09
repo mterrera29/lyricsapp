@@ -1,7 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import IncreaseFonts from './IncreaseFonts';
 
-const ScrollBar = ({ setFontSize, song }) => {
+const ScrollBar = ({
+  setFontSize,
+  song,
+  fontSize,
+  handleChange,
+  handleSaveEdit,
+}) => {
   const minSpeed = 0.1;
   const maxSpeed = 1;
 
@@ -50,6 +56,17 @@ const ScrollBar = ({ setFontSize, song }) => {
   const handleSpeedChange = (e) => {
     const newSpeed = Number(e.target.value);
     setScrollSpeed(newSpeed);
+    handleChange({ target: { name: 'scrollSpeed', value: newSpeed } });
+  };
+  const handleFontSizeChange = (e) => {
+    const size = Number(e.target.value);
+    setFontSize(size);
+    handleChange({ target: { name: 'fontSize', value: size } });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSaveEdit();
   };
 
   useEffect(() => {
@@ -67,16 +84,15 @@ const ScrollBar = ({ setFontSize, song }) => {
           border: 'none',
           borderRadius: '4px',
           cursor: 'pointer',
-          marginRight: '10px',
+          marginLeft: '10px',
           width: '40px',
         }}
       >
         {isScrolling ? '⏹' : '▶'}
       </button>
-
-      <label htmlFor='scrollSpeed' style={{ marginRight: '10px' }}>
-        Vel:
-      </label>
+      <span style={{ marginLeft: '10px', marginRight: '10px' }}>
+        {scrollSpeed.toFixed(2)}x
+      </span>
       <input
         id='scrollSpeed'
         type='range'
@@ -88,10 +104,29 @@ const ScrollBar = ({ setFontSize, song }) => {
         style={{ verticalAlign: 'middle' }}
         className='scroll-speed-slider'
       />
-      <span style={{ marginLeft: '10px' }}>{scrollSpeed.toFixed(2)}</span>
       <div>
-        <IncreaseFonts setFontSize={setFontSize} />
+        <IncreaseFonts
+          setFontSize={setFontSize}
+          fontSize={fontSize}
+          handleChange={handleChange}
+        />
       </div>
+      <button
+        onClick={handleSubmit}
+        style={{
+          padding: '5px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          marginRight: '5px',
+          width: '30px',
+          height: '30px',
+        }}
+      >
+        💾
+      </button>
     </div>
   );
 };
