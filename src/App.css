@@ -1,0 +1,173 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.mainApp {
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Los elementos estarán en una columna */
+  align-items: center; /* Alinea los elementos al principio de la columna */
+  justify-content: flex-start; /* Coloca los elementos al principio, no los centra */
+  padding-bottom: 65px; /* Espaciado inferior */
+  min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+}
+/* Barra superior */
+.app-header {
+  position: relative; /* Se establece el contenedor en posición relativa para que los elementos internos puedan ser posicionados de forma absoluta */
+  top: 0;
+  left: 0;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Asegura que los elementos estén centrados horizontalmente */
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2px solid #3a8c40;
+  height: 50px; /* Establecer una altura fija para el header */
+}
+
+/* Contenedor del título */
+.title-container {
+  flex-grow: 1; /* Esto permite que el contenedor del título crezca para ocupar el espacio disponible */
+  display: flex;
+  justify-content: center; /* Centra el título */
+  align-items: center; /* Centra el título verticalmente */
+  position: absolute; /* Permite que el contenedor del título esté centrado independientemente */
+  left: 0;
+  right: 0;
+}
+
+/* Título */
+.title {
+  margin: 0;
+}
+
+/* Menú hamburguesa */
+/* Estilos para el botón de hamburguesa */
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 1002; /* Asegúrate de que esté encima del contenido */
+}
+
+.bar {
+  background-color: #f0f0f0;
+  height: 5px;
+  width: 100%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.bar.open:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: -100%; /* Inicialmente fuera de la pantalla */
+  width: 25%;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  transition: left 0.3s ease; /* Animación para deslizar desde la izquierda */
+  padding: 20px;
+  padding-top: 50px;
+  z-index: 1001;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.side-menu.open {
+  left: 0; /* Cuando se abre el menú, se mueve a la posición 0 */
+  position: fixed;
+}
+
+.side-menu nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+.side-menu nav ul li {
+  margin: 20px 0;
+}
+
+.side-menu nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.close-btn {
+  background-color: transparent;
+  color: white;
+  font-size:30px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  padding: 10px;
+  top: 0px;
+  right: 10px;
+  height: 50px;
+}
+
+/* Estilo de cada barra del menú hamburguesa */
+.hamburger-icon {
+  background-color: white;
+  height: 5px;
+  width: 100%;
+  border-radius: 3px;
+}
+
+/* Efectos al hacer clic en el menú */
+.hamburger-menu:hover .hamburger-icon {
+  background-color: #ddd; /* Cambia el color de las barras cuando el usuario pasa el mouse */
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Altura del contenedor */
+}
+
+.spinner-inner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid rgba(0, 0, 0, 0.2);
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 768px) {
+  .side-menu {
+    width: 70%; /* Menú más grande en pantallas pequeñas */
+  }
+}

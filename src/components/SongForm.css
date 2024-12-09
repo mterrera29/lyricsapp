@@ -1,0 +1,8 @@
+.formulario> * {
+  margin-bottom: 10px;
+}
+
+.custom-quill .ql-editor {
+  font-size: var(--editor-font-size, 16px); /* Tamaño de fuente inicial */
+  line-height: var(--editor-line-height, 1.5); /* Línea dinámica */
+}

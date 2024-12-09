@@ -1,0 +1,57 @@
+/* Fondo del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centrar verticalmente */
+  z-index: 1000;
+  overflow-y: auto;
+   /* Agrega scroll al fondo del modal si el contenido es más grande */
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%; /* Ancho del modal ajustable */
+  max-width: 500px;
+  text-align: center;
+  max-height: 90vh; /* Límite máximo de altura */
+  overflow-y: auto; /* Scroll dentro del modal si el contenido excede */
+  margin: 0; /* Sin márgenes */
+  padding: 10px; /* Sin padding */
+}
+
+.modal-close {
+  background-color: transparent; /* Fondo transparente */
+  color: #333; /* Color oscuro para el texto */
+  font-size: 28px; /* Fuente más grande y clara */
+  border: none; /* Sin borde para un estilo más limpio */
+  font-weight: bold; /* Peso de fuente más fuerte */
+  cursor: pointer; /* Cursor de mano */
+  position: absolute;
+  top: 15px; /* Distancia desde la parte superior */
+  right: 15px; /* Distancia desde la derecha */
+  padding: 5px; /* Espaciado alrededor del icono */
+  transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+.modal-close:hover {
+  color: #e74c3c; /* Color del texto en hover (rojo suave) */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño al hacer hover */
+}
+
+.modal-close:focus {
+  outline: none; /* Elimina el borde de enfoque */
+}
+
+.modal-close:active {
+  transform: scale(0.95); /* Efecto de presionar (reduce el tamaño) */
+}
