@@ -16,6 +16,7 @@ function SongDetailsPage() {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editedSong, setEditedSong] = useState({});
   const [fontSize, setFontSize] = useState(16); // Valor por defecto
+  const [activeTab, setActiveTab] = useState('lyrics');
 
   useEffect(() => {
     if (song && song.fontSize) {
@@ -79,10 +80,10 @@ function SongDetailsPage() {
     setEditedSong((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleQuillChange = (content) => {
+  const handleQuillChange = (content, field) => {
     setEditedSong((prevState) => ({
       ...prevState,
-      lyrics: content,
+      [field]: content,
     }));
   };
 
@@ -101,6 +102,22 @@ function SongDetailsPage() {
         <strong>Género:</strong> {song.genre}
       </p>
       {/* Letras de la canción con el tamaño de fuente dinámico */}
+      <div className='tabs'>
+        <div
+          onClick={() => setActiveTab('lyrics')}
+          className={`tab ${activeTab === 'lyrics' ? 'active' : ''}`}
+        >
+          Letras
+        </div>
+        <div
+          onClick={() => setActiveTab('chords')}
+          className={`tab ${activeTab === 'chords' ? 'active' : ''}`}
+        >
+          Acordes
+        </div>
+      </div>
+
+      {/* Contenido */}
       <div
         style={{
           whiteSpace: 'pre-wrap', // Permite que el texto se envuelva dentro del párrafo
@@ -108,14 +125,25 @@ function SongDetailsPage() {
           padding: '10px',
           backgroundColor: '#f9f9f9',
           border: '1px solid #ccc',
-          borderRadius: '4px',
+          borderRadius: '0 0 8px 8px', // Bordes inferiores redondeados
           fontFamily: 'Arial, sans-serif',
           fontSize: `${fontSize}px`, // Tamaño de la fuente dinámico
           color: '#333',
         }}
-        dangerouslySetInnerHTML={{ __html: song.lyrics }}
         className='custom-quill-editor'
-      />
+      >
+        {activeTab === 'lyrics' && (
+          <div dangerouslySetInnerHTML={{ __html: song.lyrics }} />
+        )}
+        {activeTab === 'chords' &&
+          (song.chords ? (
+            <div dangerouslySetInnerHTML={{ __html: song.chords }} />
+          ) : (
+            <p style={{ color: '#888', fontStyle: 'italic' }}>
+              No hay acordes disponibles.
+            </p>
+          ))}
+      </div>
 
       {/* Botones adicionales */}
       <DetailsButtons

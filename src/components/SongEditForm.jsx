@@ -12,6 +12,7 @@ export const SongEditForm = ({
 }) => {
   const [scrollSpeed, setScrollSpeed] = useState(editedSong.scrollSpeed || 0.5);
   const [fontSize, setFontSize] = useState(editedSong.fontSize || 16);
+  const [activeTab, setActiveTab] = useState('lyrics');
 
   const handleSpeedChange = (e) => {
     const speed = Number(e.target.value);
@@ -58,6 +59,54 @@ export const SongEditForm = ({
           </option>
         ))}
       </select>
+      <div>
+        {/* Pestañas */}
+        <div className='tabs'>
+          <div
+            onClick={() => setActiveTab('lyrics')}
+            className={`tab ${activeTab === 'lyrics' ? 'active' : ''}`}
+          >
+            Letras
+          </div>
+          <div
+            onClick={() => setActiveTab('chords')}
+            className={`tab ${activeTab === 'chords' ? 'active' : ''}`}
+          >
+            Acordes
+          </div>
+        </div>
+
+        {/* Contenido */}
+        <div
+          className='custom-quill'
+          style={{
+            '--editor-font-size': `${fontSize}px`,
+            '--editor-line-height': `${fontSize * 1.5}px`,
+          }}
+        >
+          {activeTab === 'lyrics' && (
+            <ReactQuill
+              value={editedSong.lyrics}
+              onChange={(content) => handleQuillChange(content, 'lyrics')}
+              modules={modules}
+              formats={formats}
+              theme='snow'
+              placeholder='Escribe las letras aquí...'
+            />
+          )}
+
+          {activeTab === 'chords' && (
+            <ReactQuill
+              value={editedSong.chords}
+              onChange={(content) => handleQuillChange(content, 'chords')}
+              modules={modules}
+              formats={formats}
+              theme='snow'
+              placeholder='Escribe los acordes aquí...'
+            />
+          )}
+        </div>
+      </div>
       <div
         className='custom-quill'
         style={{
@@ -65,12 +114,6 @@ export const SongEditForm = ({
           '--editor-line-height': `${fontSize * 1.5}px`,
         }}
       >
-        <ReactQuill
-          value={editedSong.lyrics}
-          onChange={handleQuillChange}
-          modules={modules}
-          formats={formats}
-        />
         <label>Tamaño de fuente:</label>
         <select value={fontSize} onChange={handleFontSizeChange}>
           {[12, 14, 16, 18, 20, 24, 28, 32].map((size) => (

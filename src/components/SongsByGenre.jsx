@@ -17,7 +17,9 @@ const SongsByGenre = ({ songs }) => {
   }, [selectedGenre, songs]);
 
   return (
-    <div>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <h3>Canciones por Género</h3>
       <select
         value={selectedGenre}

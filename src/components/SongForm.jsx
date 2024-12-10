@@ -13,9 +13,11 @@ function SongForm({ onCloseModal }) {
   const [title, setTitle] = useState('');
   const [lyrics, setLyrics] = useState('');
   const [genre, setGenre] = useState('Ninguno');
+  const [chords, setChords] = useState('');
   const [scrollSpeed, setScrollSpeed] = useState(0.5); // Valor inicial de velocidad de scroll
   const [fontSize, setFontSize] = useState(16); // Valor inicial de tamaño de fuente
   const [isSubmitting, setIsSubmitting] = useState(false); // Para controlar el estado de envío
+  const [activeTab, setActiveTab] = useState('lyrics');
 
   // Función para manejar el cambio en la velocidad de desplazamiento
   const handleSpeedChange = (e) => {
@@ -37,6 +39,7 @@ function SongForm({ onCloseModal }) {
         title,
         lyrics,
         genre,
+        chords,
         scrollSpeed, // Guardamos la velocidad de desplazamiento
         fontSize, // Guardamos el tamaño de la fuente
       };
@@ -52,6 +55,7 @@ function SongForm({ onCloseModal }) {
         setTitle('');
         setLyrics('');
         setGenre('');
+        setChords('');
         setScrollSpeed(0.5); // Restablecer scroll speed
         setFontSize(16); // Restablecer font size
 
@@ -106,46 +110,78 @@ function SongForm({ onCloseModal }) {
 
       <p>Letra</p>
       {/* Editor Quill */}
-      <div
-        className='custom-quill'
-        style={{
-          '--editor-font-size': `${fontSize}px`,
-          '--editor-line-height': `${fontSize * 1.5}px`,
-        }}
-      >
-        <ReactQuill
-          value={lyrics}
-          onChange={setLyrics}
-          modules={modules}
-          formats={formats}
-          theme='snow'
-          placeholder='Escribe aqui...'
-        />
-        <div style={{ marginTop: '10px' }}>
-          <label
-            htmlFor='fontSize'
-            style={{
-              marginRight: '10px',
-            }}
+      <div>
+        {/* Pestañas */}
+        <div className='tabs'>
+          <div
+            onClick={() => setActiveTab('lyrics')}
+            className={`tab ${activeTab === 'lyrics' ? 'active' : ''}`}
           >
-            Tamaño de fuente:
-          </label>
-          <select
-            id='fontSize'
-            value={fontSize}
-            onChange={handleFontSizeChange}
-            style={{ marginBottom: '10px' }}
+            Letras
+          </div>
+          <div
+            onClick={() => setActiveTab('chords')}
+            className={`tab ${activeTab === 'chords' ? 'active' : ''}`}
           >
-            <option value={12}>12 px</option>
-            <option value={14}>14 px</option>
-            <option value={16}>16 px</option>
-            <option value={18}>18 px</option>
-            <option value={20}>20 px</option>
-            <option value={24}>24 px</option>
-            <option value={28}>28 px</option>
-            <option value={32}>32 px</option>
-          </select>
+            Acordes
+          </div>
         </div>
+
+        {/* Contenido */}
+        <div
+          className='custom-quill'
+          style={{
+            '--editor-font-size': `${fontSize}px`,
+            '--editor-line-height': `${fontSize * 1.5}px`,
+          }}
+        >
+          {activeTab === 'lyrics' && (
+            <ReactQuill
+              value={lyrics}
+              onChange={setLyrics}
+              modules={modules}
+              formats={formats}
+              theme='snow'
+              placeholder='Escribe las letras aquí...'
+            />
+          )}
+
+          {activeTab === 'chords' && (
+            <ReactQuill
+              value={chords}
+              onChange={setChords}
+              modules={modules}
+              formats={formats}
+              theme='snow'
+              placeholder='Escribe los acordes aquí...'
+            />
+          )}
+        </div>
+      </div>
+      <div style={{ marginTop: '10px' }}>
+        <label
+          htmlFor='fontSize'
+          style={{
+            marginRight: '10px',
+          }}
+        >
+          Tamaño de fuente:
+        </label>
+        <select
+          id='fontSize'
+          value={fontSize}
+          onChange={handleFontSizeChange}
+          style={{ marginBottom: '10px' }}
+        >
+          <option value={12}>12 px</option>
+          <option value={14}>14 px</option>
+          <option value={16}>16 px</option>
+          <option value={18}>18 px</option>
+          <option value={20}>20 px</option>
+          <option value={24}>24 px</option>
+          <option value={28}>28 px</option>
+          <option value={32}>32 px</option>
+        </select>
       </div>
 
       {/* Velocidad de desplazamiento */}

@@ -6,3 +6,52 @@
   font-size: var(--editor-font-size, 16px); /* Tamaño de fuente inicial */
   line-height: var(--editor-line-height, 1.5); /* Línea dinámica */
 }
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #ddd; /* Línea divisoria entre pestañas y contenido */
+  position: relative; /* Para manejar bordes redondeados */
+  top: 1px; /* Elevar ligeramente para eliminar espacio */
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-bottom: none; /* Quita el borde inferior para un efecto integrado */
+  font-size: 14px;
+  line-height: 1.2;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab:first-child {
+  border-radius: 8px 0 0 0; /* Solo bordes exteriores redondeados en la izquierda */
+}
+
+.tab:last-child {
+  border-radius: 0 8px 0 0; /* Solo bordes exteriores redondeados en la derecha */
+}
+
+.tab.active {
+  background-color: white; /* Fondo blanco para la pestaña activa */
+  color: #007bff; /* Color primario para texto activo */
+  font-weight: bold;
+}
+
+.tab:not(.active) {
+  color: #888; /* Texto apagado para pestañas inactivas */
+}
+
+.tab:hover {
+  background-color: #eaeaea; /* Fondo más claro al pasar el cursor */
+}
+
+.custom-quill {
+  border: 1px solid #ddd;
+  border-radius: 0 0 8px 8px; /* Bordes inferiores redondeados */
+  padding: 5px;
+  margin-top: -1px; /* Conecta visualmente con las pestañas */
+}

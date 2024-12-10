@@ -5,19 +5,36 @@ const SongsByAuthor = ({ songs }) => {
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
 
-  // Obtener autores únicos
-  const authors = [...new Set(songs.map((song) => song.artist))];
+  // Función para normalizar texto (quitar acentos y convertir a minúsculas)
+  const normalizeText = (text) =>
+    text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+
+  // Obtener autores únicos manteniendo el formato original
+  const authors = [
+    ...new Map(
+      songs.map((song) => [normalizeText(song.artist), song.artist])
+    ).values(),
+  ];
 
   useEffect(() => {
     if (selectedAuthor) {
-      setFilteredSongs(songs.filter((song) => song.artist === selectedAuthor));
+      setFilteredSongs(
+        songs.filter(
+          (song) => normalizeText(song.artist) === normalizeText(selectedAuthor)
+        )
+      );
     } else {
       setFilteredSongs(songs); // Mostrar todas si no hay filtro
     }
   }, [selectedAuthor, songs]);
 
   return (
-    <div>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <h3>Canciones por Autor</h3>
       <select
         value={selectedAuthor}
