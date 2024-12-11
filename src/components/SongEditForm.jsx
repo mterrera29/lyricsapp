@@ -9,22 +9,10 @@ export const SongEditForm = ({
   handleQuillChange,
   handleSaveEdit,
   setIsEditOpen,
+  fontSizeLyrics,
+  fontSizeChords,
 }) => {
-  const [scrollSpeed, setScrollSpeed] = useState(editedSong.scrollSpeed || 0.5);
-  const [fontSize, setFontSize] = useState(editedSong.fontSize || 16);
   const [activeTab, setActiveTab] = useState('lyrics');
-
-  const handleSpeedChange = (e) => {
-    const speed = Number(e.target.value);
-    setScrollSpeed(speed);
-    handleChange({ target: { name: 'scrollSpeed', value: speed } });
-  };
-
-  const handleFontSizeChange = (e) => {
-    const size = Number(e.target.value);
-    setFontSize(size);
-    handleChange({ target: { name: 'fontSize', value: size } });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,8 +68,12 @@ export const SongEditForm = ({
         <div
           className='custom-quill'
           style={{
-            '--editor-font-size': `${fontSize}px`,
-            '--editor-line-height': `${fontSize * 1.5}px`,
+            '--editor-font-size': `${
+              activeTab === 'lyrics' ? fontSizeLyrics : fontSizeChords
+            }px`,
+            '--editor-line-height': `${
+              (activeTab === 'lyrics' ? fontSizeLyrics : fontSizeChords) * 1.5
+            }px`,
           }}
         >
           {activeTab === 'lyrics' && (
@@ -106,34 +98,6 @@ export const SongEditForm = ({
             />
           )}
         </div>
-      </div>
-      <div
-        className='custom-quill'
-        style={{
-          '--editor-font-size': `${fontSize}px`,
-          '--editor-line-height': `${fontSize * 1.5}px`,
-        }}
-      >
-        <label>Tamaño de fuente:</label>
-        <select value={fontSize} onChange={handleFontSizeChange}>
-          {[12, 14, 16, 18, 20, 24, 28, 32].map((size) => (
-            <option key={size} value={size}>
-              {size}px
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label>Velocidad:</label>
-        <input
-          type='range'
-          min='0.10'
-          max='1'
-          step='0.05'
-          value={scrollSpeed}
-          onChange={handleSpeedChange}
-        />
-        {scrollSpeed}x
       </div>
       <div>
         <button

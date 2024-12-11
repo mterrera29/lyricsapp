@@ -2,26 +2,36 @@ import { useState, useRef, useEffect } from 'react';
 import IncreaseFonts from './IncreaseFonts';
 
 const ScrollBar = ({
-  setFontSize,
   song,
-  fontSize,
+  setFontSizeLyrics,
+  setFontSizeChords,
+  fontSizeLyrics,
+  fontSizeChords,
   handleChange,
   handleSaveEdit,
+  activeTab,
 }) => {
   const minSpeed = 0.1;
   const maxSpeed = 1;
 
   const [isScrolling, setIsScrolling] = useState(false);
-  const [scrollSpeed, setScrollSpeed] = useState(
+  const [scrollSpeedLyrics, setScrollSpeedLyrics] = useState(
+    song?.scrollSpeed || (minSpeed + maxSpeed) / 3
+  ); // Velocidad inicial centrada
+  const [scrollSpeedChords, setScrollSpeedChords] = useState(
     song?.scrollSpeed || (minSpeed + maxSpeed) / 3
   ); // Velocidad inicial centrada
   const scrollInterval = useRef(null);
   const scrollAccumulator = useRef(0);
 
-  // Actualiza `scrollSpeed` cuando cambia `song`
   useEffect(() => {
-    if (song?.scrollSpeed) {
-      setScrollSpeed(song.scrollSpeed);
+    if (song) {
+      if (song.scrollSpeedLyrics) {
+        setScrollSpeedLyrics(song.scrollSpeedLyrics);
+      }
+      if (song.scrollSpeedChords) {
+        setScrollSpeedChords(song.scrollSpeedChords);
+      }
     }
   }, [song]);
 
@@ -29,7 +39,8 @@ const ScrollBar = ({
     if (!isScrolling) {
       setIsScrolling(true);
       scrollInterval.current = setInterval(() => {
-        scrollAccumulator.current += scrollSpeed;
+        scrollAccumulator.current +=
+          activeTab === 'lyrics' ? scrollSpeedLyrics : scrollSpeedChords;
 
         if (scrollAccumulator.current >= 1) {
           const scrollAmount = Math.floor(scrollAccumulator.current);
@@ -55,13 +66,17 @@ const ScrollBar = ({
 
   const handleSpeedChange = (e) => {
     const newSpeed = Number(e.target.value);
-    setScrollSpeed(newSpeed);
+
+    if (activeTab === 'lyrics') {
+      setScrollSpeedLyrics(newSpeed); // Actualiza la velocidad para la sección de letras
+      handleChange({ target: { name: 'scrollSpeedLyrics', value: newSpeed } });
+    } else {
+      setScrollSpeedChords(newSpeed); // Actualiza la velocidad para la sección de acordes
+      handleChange({ target: { name: 'scrollSpeedChords', value: newSpeed } });
+    }
+
+    // Propaga el cambio al manejar el cambio global del formulario
     handleChange({ target: { name: 'scrollSpeed', value: newSpeed } });
-  };
-  const handleFontSizeChange = (e) => {
-    const size = Number(e.target.value);
-    setFontSize(size);
-    handleChange({ target: { name: 'fontSize', value: size } });
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +106,11 @@ const ScrollBar = ({
         {isScrolling ? '⏹' : '▶'}
       </button>
       <span style={{ marginLeft: '10px', marginRight: '10px' }}>
-        {scrollSpeed.toFixed(2)}x
+        {(activeTab === 'lyrics'
+          ? scrollSpeedLyrics
+          : scrollSpeedChords
+        ).toFixed(1)}
+        x
       </span>
       <input
         id='scrollSpeed'
@@ -99,16 +118,19 @@ const ScrollBar = ({
         min={minSpeed}
         max={maxSpeed}
         step='0.05'
-        value={scrollSpeed}
+        value={activeTab === 'lyrics' ? scrollSpeedLyrics : scrollSpeedChords}
         onChange={handleSpeedChange}
         style={{ verticalAlign: 'middle' }}
         className='scroll-speed-slider'
       />
       <div>
         <IncreaseFonts
-          setFontSize={setFontSize}
-          fontSize={fontSize}
+          activeTab={activeTab}
           handleChange={handleChange}
+          setFontSizeLyrics={setFontSizeLyrics}
+          setFontSizeChords={setFontSizeChords}
+          fontSizeLyrics={fontSizeLyrics}
+          fontSizeChords={fontSizeChords}
         />
       </div>
       <button

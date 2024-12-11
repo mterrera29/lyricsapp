@@ -1,27 +1,35 @@
-import { useState } from 'react';
-
-const IncreaseFonts = ({ setFontSize, fontSize, handleChange }) => {
+const IncreaseFonts = ({
+  handleChange,
+  activeTab,
+  setFontSizeLyrics,
+  setFontSizeChords,
+  fontSizeLyrics,
+  fontSizeChords,
+}) => {
   // Función para aumentar el tamaño de la letra
   const increaseFontSize = () => {
-    // Calcula el nuevo tamaño antes de actualizar el estado.
-    const newFontSize = Math.min(fontSize + 2, 32);
+    if (activeTab === 'lyrics') {
+      const newFontSize = Math.min(fontSizeLyrics + 2, 32); // Máximo 32
+      setFontSizeLyrics(newFontSize);
+      handleChange({ target: { name: 'fontSizeLyrics', value: newFontSize } });
+    } else {
+      const newFontSize = Math.min(fontSizeChords + 2, 32); // Máximo 32
+      setFontSizeChords(newFontSize);
+      handleChange({ target: { name: 'fontSizeChords', value: newFontSize } });
+    }
+  };
 
-    // Actualiza el estado.
-    setFontSize(newFontSize);
-
-    // Llama a handleChange con el nuevo valor.
-    handleChange({ target: { name: 'fontSize', value: newFontSize } });
-  }; // Tamaño máximo: 32px
   // Función para disminuir el tamaño de la letra
   const decreaseFontSize = () => {
-    // Calcula el nuevo tamaño antes de actualizar el estado.
-    const newFontSize = Math.max(fontSize - 2, 12);
-
-    // Actualiza el estado.
-    setFontSize(newFontSize);
-
-    // Llama a handleChange con el nuevo valor.
-    handleChange({ target: { name: 'fontSize', value: newFontSize } });
+    if (activeTab === 'lyrics') {
+      const newFontSize = Math.max(fontSizeLyrics - 2, 12); // Mínimo 12
+      setFontSizeLyrics(newFontSize);
+      handleChange({ target: { name: 'fontSizeLyrics', value: newFontSize } });
+    } else {
+      const newFontSize = Math.max(fontSizeChords - 2, 12); // Mínimo 12
+      setFontSizeChords(newFontSize);
+      handleChange({ target: { name: 'fontSizeChords', value: newFontSize } });
+    }
   };
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -67,7 +75,7 @@ const IncreaseFonts = ({ setFontSize, fontSize, handleChange }) => {
         </button>
       </div>
       <p style={{ margin: '0px', marginLeft: '10px', marginRight: '10px' }}>
-        {fontSize}px
+        {activeTab === 'lyrics' ? `${fontSizeLyrics}px` : `${fontSizeChords}px`}
       </p>
     </div>
   );

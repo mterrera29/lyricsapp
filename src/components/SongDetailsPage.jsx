@@ -7,6 +7,7 @@ import { SongEditForm } from './SongEditForm.jsx';
 import ModalDelete from './ModalDelete.jsx';
 import ScrollBar from './ScrollBar.jsx';
 import DetailsButtons from './DetailsButtons.jsx';
+import SongContent from './SongContent.jsx';
 
 function SongDetailsPage() {
   const { id } = useParams();
@@ -15,14 +16,21 @@ function SongDetailsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editedSong, setEditedSong] = useState({});
-  const [fontSize, setFontSize] = useState(16); // Valor por defecto
+  const [fontSizeLyrics, setFontSizeLyrics] = useState(16);
+  const [fontSizeChords, setFontSizeChords] = useState(16);
   const [activeTab, setActiveTab] = useState('lyrics');
 
   useEffect(() => {
-    if (song && song.fontSize) {
-      setFontSize(song.fontSize); // Si `song` tiene `fontSize`, usa ese valor
+    if (song) {
+      if (song.fontSizeLyrics) {
+        setFontSizeLyrics(song.fontSizeLyrics);
+      }
+      if (song.fontSizeChords) {
+        setFontSizeChords(song.fontSizeChords);
+      }
     }
   }, [song]);
+
   useEffect(() => {
     const fetchSong = async () => {
       const songDocRef = doc(db, 'songs', id); // Obtener la canción por ID
@@ -90,18 +98,20 @@ function SongDetailsPage() {
   return (
     <div style={{ padding: '0px', paddingLeft: '0px', paddingRight: '0px' }}>
       <ScrollBar
-        setFontSize={setFontSize}
+        setFontSizeLyrics={setFontSizeLyrics}
+        setFontSizeChords={setFontSizeChords}
+        fontSizeLyrics={fontSizeLyrics}
+        fontSizeChords={fontSizeChords}
         song={editedSong || song}
-        fontSize={fontSize}
         handleChange={handleChange}
         handleSaveEdit={handleSaveEdit}
+        activeTab={activeTab}
       />
       <h2 style={{ margin: '0' }}>{song.title}</h2>
       <h3 style={{ margin: '0' }}>Por: {song.artist}</h3>
       <p style={{ margin: '0' }}>
         <strong>Género:</strong> {song.genre}
       </p>
-      {/* Letras de la canción con el tamaño de fuente dinámico */}
       <div className='tabs'>
         <div
           onClick={() => setActiveTab('lyrics')}
@@ -116,36 +126,12 @@ function SongDetailsPage() {
           Acordes
         </div>
       </div>
-
-      {/* Contenido */}
-      <div
-        style={{
-          whiteSpace: 'pre-wrap', // Permite que el texto se envuelva dentro del párrafo
-          marginTop: '10px',
-          padding: '10px',
-          backgroundColor: '#f9f9f9',
-          border: '1px solid #ccc',
-          borderRadius: '0 0 8px 8px', // Bordes inferiores redondeados
-          fontFamily: 'Arial, sans-serif',
-          fontSize: `${fontSize}px`, // Tamaño de la fuente dinámico
-          color: '#333',
-        }}
-        className='custom-quill-editor'
-      >
-        {activeTab === 'lyrics' && (
-          <div dangerouslySetInnerHTML={{ __html: song.lyrics }} />
-        )}
-        {activeTab === 'chords' &&
-          (song.chords ? (
-            <div dangerouslySetInnerHTML={{ __html: song.chords }} />
-          ) : (
-            <p style={{ color: '#888', fontStyle: 'italic' }}>
-              No hay acordes disponibles.
-            </p>
-          ))}
-      </div>
-
-      {/* Botones adicionales */}
+      <SongContent
+        activeTab={activeTab}
+        fontSizeLyrics={fontSizeLyrics}
+        fontSizeChords={fontSizeChords}
+        song={song}
+      />
       <DetailsButtons
         setIsModalOpen={setIsModalOpen}
         setIsEditOpen={setIsEditOpen}
@@ -174,6 +160,8 @@ function SongDetailsPage() {
               handleQuillChange={handleQuillChange}
               handleSaveEdit={handleSaveEdit}
               setIsEditOpen={setIsEditOpen}
+              fontSizeLyrics={fontSizeLyrics}
+              fontSizeChords={fontSizeChords}
             />
           </div>
         </div>

@@ -50,8 +50,6 @@
 }
 
 .custom-quill {
-  border: 1px solid #ddd;
   border-radius: 0 0 8px 8px; /* Bordes inferiores redondeados */
-  padding: 5px;
   margin-top: -1px; /* Conecta visualmente con las pestañas */
 }

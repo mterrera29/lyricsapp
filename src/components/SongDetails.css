@@ -1,5 +1,7 @@
 
-
+.custom-quill-editor{
+  width: 600px;
+}
 .custom-quill-editor p {
   margin: 0; /* Opcional: puedes ajustar los márgenes */
   padding: 0; /* Opcional: si quieres remover padding específico */
@@ -88,6 +90,9 @@
     width: 14px;
     height: 14px;
   }
+  .custom-quill-editor{
+    width: 80vw;
+  }
 }
 
 /* Media query para pantallas muy pequeñas (por ejemplo, < 480px) */
@@ -100,5 +105,9 @@
   .scroll-speed-slider::-moz-range-thumb {
     width: 12px;
     height: 12px;
+  }
+  .custom-quill-editor{
+    width: 100%;
+    min-width: 95vw;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'quill/dist/quill.snow.css'; // Para el tema Snow
@@ -16,18 +16,29 @@ function SongForm({ onCloseModal }) {
   const [chords, setChords] = useState('');
   const [scrollSpeed, setScrollSpeed] = useState(0.5); // Valor inicial de velocidad de scroll
   const [fontSize, setFontSize] = useState(16); // Valor inicial de tamaño de fuente
+  const [fontSizeLyrics, setFontSizeLyrics] = useState(16);
+  const [fontSizeChords, setFontSizeChords] = useState(16);
+  const [scrollSpeedLyrics, setScrollSpeedLyrics] = useState(0.5); // Velocidad inicial centrada
+  const [scrollSpeedChords, setScrollSpeedChords] = useState(0.5); // Velocidad inicial centrada
   const [isSubmitting, setIsSubmitting] = useState(false); // Para controlar el estado de envío
   const [activeTab, setActiveTab] = useState('lyrics');
 
   // Función para manejar el cambio en la velocidad de desplazamiento
   const handleSpeedChange = (e) => {
-    // Convertir el valor de la entrada a un número
-    setScrollSpeed(Number(e.target.value));
+    // Cambiar la velocidad de desplazamiento para ambas pestañas
+    const speed = Number(e.target.value);
+    setScrollSpeed(speed);
+    setScrollSpeedLyrics(speed);
+    setScrollSpeedChords(speed);
   };
 
   // Función para manejar el cambio en el tamaño de la fuente
   const handleFontSizeChange = (e) => {
-    setFontSize(Number(e.target.value));
+    // Cambiar el tamaño de fuente para ambas pestañas
+    const size = Number(e.target.value);
+    setFontSize(size);
+    setFontSizeLyrics(size);
+    setFontSizeChords(size);
   };
 
   const handleSubmit = async (e) => {
@@ -40,8 +51,10 @@ function SongForm({ onCloseModal }) {
         lyrics,
         genre,
         chords,
-        scrollSpeed, // Guardamos la velocidad de desplazamiento
-        fontSize, // Guardamos el tamaño de la fuente
+        scrollSpeedLyrics,
+        scrollSpeedChords, // Guardamos la velocidad de desplazamiento
+        fontSizeLyrics,
+        fontSizeChords, // Guardamos el tamaño de la fuente
       };
 
       try {
@@ -200,7 +213,7 @@ function SongForm({ onCloseModal }) {
           style={{ verticalAlign: 'middle' }}
           className='scroll-speed-slider'
         />
-        <label>{scrollSpeed}x</label>
+        <label>{scrollSpeed.toFixed(1)}x</label>
       </div>
 
       {/* Tamaño de la fuente */}
