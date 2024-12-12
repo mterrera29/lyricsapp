@@ -1,9 +1,12 @@
 import SongList from './SongList';
 import SongForm from './SongForm';
 import { useState } from 'react';
+import useSongs from '../hooksUser/UseSongs';
 
-const NewSongButton = ({ isLoading, songs }) => {
+const NewSongButton = () => {
+  const { songs, isLoading } = useSongs();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <button

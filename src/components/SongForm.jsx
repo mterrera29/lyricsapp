@@ -3,12 +3,12 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'quill/dist/quill.snow.css'; // Para el tema Snow
 import 'quill/dist/quill.bubble.css'; /// Importa los estilos de Quill
-import { db } from './firebase'; // Importa la configuración de Firebase
-import { collection, addDoc } from 'firebase/firestore'; // Importa funciones necesarias de Firestore
 import './SongForm.css';
 import { genres, modules, formats } from '../data';
+import useCreateSong from '../hooksUser/UseCreateSong';
 
 function SongForm({ onCloseModal }) {
+  const { createSong, isSubmitting } = useCreateSong();
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [lyrics, setLyrics] = useState('');
@@ -20,7 +20,6 @@ function SongForm({ onCloseModal }) {
   const [fontSizeChords, setFontSizeChords] = useState(16);
   const [scrollSpeedLyrics, setScrollSpeedLyrics] = useState(0.5); // Velocidad inicial centrada
   const [scrollSpeedChords, setScrollSpeedChords] = useState(0.5); // Velocidad inicial centrada
-  const [isSubmitting, setIsSubmitting] = useState(false); // Para controlar el estado de envío
   const [activeTab, setActiveTab] = useState('lyrics');
 
   // Función para manejar el cambio en la velocidad de desplazamiento
@@ -58,10 +57,7 @@ function SongForm({ onCloseModal }) {
       };
 
       try {
-        setIsSubmitting(true); // Evita doble envío
-        // Guardar la canción en Firestore
-        const docRef = await addDoc(collection(db, 'songs'), newSong);
-        const songWithId = { id: docRef.id, ...newSong };
+        createSong(newSong);
 
         // Limpiar el formulario
         setArtist('');
@@ -76,8 +72,6 @@ function SongForm({ onCloseModal }) {
         onCloseModal();
       } catch (error) {
         console.error('Error al agregar la canción: ', error);
-      } finally {
-        setIsSubmitting(false); // Restablece el estado de envío
       }
     }
   };

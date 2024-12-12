@@ -1,21 +1,26 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { db } from './firebase'; // Importa la instancia de Firestore
-import { doc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore';
 import './SongDetails.css';
 import { SongEditForm } from './SongEditForm.jsx';
 import ModalDelete from './ModalDelete.jsx';
 import ScrollBar from './ScrollBar.jsx';
 import DetailsButtons from './DetailsButtons.jsx';
 import SongContent from './SongContent.jsx';
+import useEditedSong from '../hooksUser/UseEditedSong.jsx';
+import useDeleteSong from '../hooksUser/UseDeleteSong.jsx';
 
 function SongDetailsPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [song, setSong] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [editedSong, setEditedSong] = useState({});
+  const {
+    song,
+    editedSong,
+    handleSaveEdit,
+    handleChange,
+    handleQuillChange,
+    isEditOpen,
+    setIsEditOpen,
+  } = useEditedSong(id);
+  const { handleDelete, isModalOpen, setIsModalOpen } = useDeleteSong();
   const [fontSizeLyrics, setFontSizeLyrics] = useState(16);
   const [fontSizeChords, setFontSizeChords] = useState(16);
   const [activeTab, setActiveTab] = useState('lyrics');
@@ -31,21 +36,6 @@ function SongDetailsPage() {
     }
   }, [song]);
 
-  useEffect(() => {
-    const fetchSong = async () => {
-      const songDocRef = doc(db, 'songs', id); // Obtener la canción por ID
-      const songSnapshot = await getDoc(songDocRef);
-      if (songSnapshot.exists()) {
-        setSong(songSnapshot.data());
-        setEditedSong(songSnapshot.data());
-      } else {
-        console.log('Canción no encontrada');
-      }
-    };
-
-    fetchSong();
-  }, [id]);
-
   if (!song) {
     return (
       <div className='spinner'>
@@ -53,47 +43,6 @@ function SongDetailsPage() {
       </div>
     );
   }
-
-  const handleDelete = async () => {
-    try {
-      const songDocRef = doc(db, 'songs', id);
-      await deleteDoc(songDocRef);
-      setIsModalOpen(false);
-      navigate('/');
-    } catch (error) {
-      console.error('Error al eliminar la canción:', error);
-    }
-  };
-
-  const handleSaveEdit = async () => {
-    try {
-      const updatedSong = {
-        ...editedSong,
-      };
-
-      const songDocRef = doc(db, 'songs', id);
-      await updateDoc(songDocRef, updatedSong);
-
-      setSong(updatedSong); // Actualiza el estado principal
-      setEditedSong(updatedSong);
-      setIsEditOpen(false);
-      console.log('guardado');
-    } catch (error) {
-      console.error('Error al guardar los cambios:', error);
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditedSong((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleQuillChange = (content, field) => {
-    setEditedSong((prevState) => ({
-      ...prevState,
-      [field]: content,
-    }));
-  };
 
   return (
     <div style={{ padding: '0px', paddingLeft: '0px', paddingRight: '0px' }}>
@@ -139,6 +88,7 @@ function SongDetailsPage() {
 
       {isModalOpen && (
         <ModalDelete
+          id={id}
           song={song}
           handleDelete={handleDelete}
           setIsModalOpen={setIsModalOpen}

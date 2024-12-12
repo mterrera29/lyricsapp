@@ -1,4 +1,4 @@
-const ModalDelete = ({ song, handleDelete, setIsModalOpen }) => {
+const ModalDelete = ({ song, handleDelete, setIsModalOpen, id }) => {
   return (
     <div className='modal-overlay'>
       <div className='modal-content'>
@@ -6,7 +6,7 @@ const ModalDelete = ({ song, handleDelete, setIsModalOpen }) => {
         <p>¿Deseas eliminar la canción "{song.title}"?</p>
         <div style={{ marginTop: '20px' }}>
           <button
-            onClick={handleDelete}
+            onClick={() => handleDelete(id)}
             style={{
               padding: '10px 15px',
               backgroundColor: 'red',

@@ -1,20 +1,30 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Header.css';
+import Avatar from './Avatar';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Est
   const navigate = useNavigate();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className='app-header'>
+      {/* Botón del menú hamburguesa */}
       <div className='hamburger-menu' onClick={toggleMenu}>
         <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
         <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
         <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
       </div>
+
+      {/* Menú lateral */}
       <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
         <nav>
           <ul>
@@ -22,7 +32,7 @@ const Header = () => {
               <a
                 href='#'
                 onClick={() => {
-                  toggleMenu();
+                  closeMenu();
                   navigate('/');
                 }}
               >
@@ -33,8 +43,8 @@ const Header = () => {
               <a
                 href='#'
                 onClick={() => {
-                  toggleMenu();
-                  navigate('/');
+                  closeMenu();
+                  navigate('/songs');
                 }}
               >
                 Lista de Canciones
@@ -44,7 +54,7 @@ const Header = () => {
               <a
                 href='#'
                 onClick={() => {
-                  toggleMenu();
+                  closeMenu();
                   navigate('/author');
                 }}
               >
@@ -55,7 +65,7 @@ const Header = () => {
               <a
                 href='#'
                 onClick={() => {
-                  toggleMenu();
+                  closeMenu();
                   navigate('/genre');
                 }}
               >
@@ -65,6 +75,8 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+
+      {/* Título */}
       <div className='title-container'>
         <h2
           className='title'
@@ -75,6 +87,8 @@ const Header = () => {
           Lyrics App
         </h2>
       </div>
+
+      <Avatar />
     </div>
   );
 };
