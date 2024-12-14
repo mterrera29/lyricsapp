@@ -9,6 +9,7 @@ import SongsByGenre from './components/SongsByGenre';
 import SongsByAuthor from './components/SongsByAuthor';
 import AuthProvider from './context/AuthProvider';
 import useSongs from './hooksUser/UseSongs.jsx';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   const { songs, isLoading, setSongs } = useSongs();

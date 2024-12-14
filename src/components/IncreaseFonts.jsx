@@ -41,6 +41,7 @@ const IncreaseFonts = ({
           alignItems: 'center',
           marginLeft: '10px',
           flexWrap: 'nowrap',
+          marginRight: '10px',
         }}
       >
         <button
@@ -56,8 +57,13 @@ const IncreaseFonts = ({
             height: '30px',
           }}
         >
-          ➕
+          <i className='bi bi-caret-up-fill'></i>
         </button>
+        <p style={{ margin: '0px', marginLeft: '2px', marginRight: '2px' }}>
+          {activeTab === 'lyrics'
+            ? `${fontSizeLyrics}px`
+            : `${fontSizeChords}px`}
+        </p>
         <button
           onClick={decreaseFontSize}
           style={{
@@ -71,12 +77,9 @@ const IncreaseFonts = ({
             height: '30px',
           }}
         >
-          ➖
+          <i className='bi bi-caret-down-fill'></i>
         </button>
       </div>
-      <p style={{ margin: '0px', marginLeft: '10px', marginRight: '10px' }}>
-        {activeTab === 'lyrics' ? `${fontSizeLyrics}px` : `${fontSizeChords}px`}
-      </p>
     </div>
   );
 };

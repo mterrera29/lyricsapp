@@ -93,7 +93,7 @@ const ScrollBar = ({
       <button
         onClick={isScrolling ? stopScrolling : startScrolling}
         style={{
-          padding: '10px 15px',
+          padding: '5px 5x',
           backgroundColor: isScrolling ? '#dc3545' : '#007bff',
           color: 'white',
           border: 'none',
@@ -101,9 +101,17 @@ const ScrollBar = ({
           cursor: 'pointer',
           marginLeft: '10px',
           width: '40px',
+          height: '40px',
+          textAlign: 'center',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
-        {isScrolling ? '⏹' : '▶'}
+        {isScrolling ? (
+          <i className='bi bi-stop-fill' style={{ fontSize: '20px' }}></i>
+        ) : (
+          <i className='bi bi-play-fill' style={{ fontSize: '20px' }}></i>
+        )}
       </button>
       <span style={{ marginLeft: '10px', marginRight: '10px' }}>
         {(activeTab === 'lyrics'
@@ -147,7 +155,7 @@ const ScrollBar = ({
           height: '30px',
         }}
       >
-        💾
+        <i className='bi bi-floppy-fill'></i>
       </button>
     </div>
   );

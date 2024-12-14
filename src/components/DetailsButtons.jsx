@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import useWakeLock from '../hooksUser/useWakeLock';
 
 const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
-  const { requestWakeLock, releaseWakeLock } = useWakeLock();
-
   const navigate = useNavigate();
   return (
     <div
@@ -16,7 +13,6 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
     >
       <button
         onClick={() => {
-          releaseWakeLock();
           navigate(-1);
         }}
         style={{
@@ -31,7 +27,7 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
           width: '50px',
         }}
       >
-        ↩
+        <i className='bi bi-reply-fill'></i>
       </button>
 
       <button
@@ -64,7 +60,7 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
           width: '50px',
         }}
       >
-        ✍
+        <i className='bi bi-pencil-square'></i>
       </button>
     </div>
   );

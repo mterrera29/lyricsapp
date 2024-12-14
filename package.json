@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap-icons": "^1.11.3",
     "firebase": "^11.0.2",
     "froala-editor": "^4.3.1",
     "quill": "^2.0.3",
