@@ -33,7 +33,7 @@ function SongDetailsPage() {
     return () => {
       releaseWakeLock();
     };
-  }, [requestWakeLock, releaseWakeLock]);
+  }, []);
 
   useEffect(() => {
     if (song) {

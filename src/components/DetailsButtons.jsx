@@ -15,7 +15,10 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
       }}
     >
       <button
-        onClick={() => navigate(-1) && releaseWakeLock()}
+        onClick={() => {
+          releaseWakeLock();
+          navigate(-1);
+        }}
         style={{
           marginTop: '10px',
           padding: '10px 15px',
