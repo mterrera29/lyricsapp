@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import useWakeLock from '../hooksUser/useWakeLock';
 
 const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
+  const { requestWakeLock, releaseWakeLock } = useWakeLock();
+
   const navigate = useNavigate();
   return (
     <div
@@ -12,7 +15,7 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
       }}
     >
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(-1) && releaseWakeLock()}
         style={{
           marginTop: '10px',
           padding: '10px 15px',

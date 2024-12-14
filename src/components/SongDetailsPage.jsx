@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import './SongDetails.css';
 import { SongEditForm } from './SongEditForm.jsx';
 import ModalDelete from './ModalDelete.jsx';
@@ -8,6 +8,7 @@ import DetailsButtons from './DetailsButtons.jsx';
 import SongContent from './SongContent.jsx';
 import useEditedSong from '../hooksUser/UseEditedSong.jsx';
 import useDeleteSong from '../hooksUser/UseDeleteSong.jsx';
+import useWakeLock from '../hooksUser/useWakeLock.jsx';
 
 function SongDetailsPage() {
   const { id } = useParams();
@@ -24,32 +25,7 @@ function SongDetailsPage() {
   const [fontSizeLyrics, setFontSizeLyrics] = useState(16);
   const [fontSizeChords, setFontSizeChords] = useState(16);
   const [activeTab, setActiveTab] = useState('lyrics');
-
-  const [wakeLock, setWakeLock] = useState(null);
-
-  // Función para activar Wake Lock
-  const requestWakeLock = useCallback(async () => {
-    try {
-      if ('wakeLock' in navigator) {
-        const lock = await navigator.wakeLock.request('screen');
-        setWakeLock(lock);
-        console.log('Wake Lock activado');
-      } else {
-        console.warn('Wake Lock API no está soportada en este navegador.');
-      }
-    } catch (err) {
-      console.error('Error al activar Wake Lock:', err);
-    }
-  }, []);
-
-  // Función para liberar Wake Lock
-  const releaseWakeLock = useCallback(async () => {
-    if (wakeLock) {
-      await wakeLock.release();
-      setWakeLock(null);
-      console.log('Wake Lock desactivado');
-    }
-  }, [wakeLock]);
+  const { requestWakeLock, releaseWakeLock } = useWakeLock();
 
   useEffect(() => {
     requestWakeLock();
