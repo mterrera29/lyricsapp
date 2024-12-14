@@ -69,10 +69,14 @@ export const SongEditForm = ({
           className='custom-quill'
           style={{
             '--editor-font-size': `${
-              activeTab === 'lyrics' ? fontSizeLyrics : fontSizeChords
+              activeTab === 'lyrics'
+                ? editedSong.fontSizeLyrics
+                : editedSong.fontSizeChords
             }px`,
             '--editor-line-height': `${
-              (activeTab === 'lyrics' ? fontSizeLyrics : fontSizeChords) * 1.5
+              (activeTab === 'lyrics'
+                ? editedSong.fontSizeLyrics
+                : editedSong.fontSizeChords) * 1.5
             }px`,
           }}
         >

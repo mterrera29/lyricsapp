@@ -105,6 +105,7 @@ const ScrollBar = ({
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         {isScrolling ? (

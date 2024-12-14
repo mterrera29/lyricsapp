@@ -44,10 +44,10 @@ const Header = () => {
                 href='#'
                 onClick={() => {
                   closeMenu();
-                  navigate('/songs');
+                  navigate('/');
                 }}
               >
-                Lista de Canciones
+                Mis Canciones
               </a>
             </li>
             <li>

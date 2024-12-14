@@ -44,7 +44,7 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
           width: '50px',
         }}
       >
-        ✖
+        <i className='bi bi-trash'></i>
       </button>
 
       <button

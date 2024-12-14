@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './SongDetails.css';
 import { SongEditForm } from './SongEditForm.jsx';
@@ -26,6 +26,7 @@ function SongDetailsPage() {
   const [fontSizeChords, setFontSizeChords] = useState(16);
   const [activeTab, setActiveTab] = useState('lyrics');
   const { requestWakeLock, releaseWakeLock } = useWakeLock();
+  const navigate = useNavigate();
 
   useEffect(() => {
     requestWakeLock();
@@ -55,7 +56,14 @@ function SongDetailsPage() {
   }
 
   return (
-    <div style={{ padding: '0px', paddingLeft: '0px', paddingRight: '0px' }}>
+    <div
+      style={{
+        padding: '0px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        position: 'relative',
+      }}
+    >
       <ScrollBar
         setFontSizeLyrics={setFontSizeLyrics}
         setFontSizeChords={setFontSizeChords}
@@ -66,6 +74,19 @@ function SongDetailsPage() {
         handleSaveEdit={handleSaveEdit}
         activeTab={activeTab}
       />
+      <p
+        onClick={() => {
+          navigate(-1);
+        }}
+        style={{
+          position: 'absolute',
+          top: '-18px',
+          right: '0',
+          cursor: 'pointer',
+        }}
+      >
+        <i className='bi bi-box-arrow-in-left'></i>Mis canciones
+      </p>
       <h2 style={{ margin: '0' }}>{song.title}</h2>
       <h3 style={{ margin: '0' }}>Por: {song.artist}</h3>
       <p style={{ margin: '0' }}>
