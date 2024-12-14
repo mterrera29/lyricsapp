@@ -1,4 +1,5 @@
 export const genres = [
+  "Ninguno",
   'Pop',
   'Rock',
   'Hip-Hop/Rap',
