@@ -26,11 +26,18 @@ const Avatar = () => {
 
       {/* Menú desplegable del avatar */}
       {isMenuOpen && (
-        <div className='dropdown-menu' onClick={toggleMenu}>
+        <div className='dropdown-menu'>
           {user ? (
-            <button onClick={logout}>Sign Out</button>
+            <>
+              <p className='user-name'>{user.displayName || 'Usuario'}</p>
+              <button onClick={logout} className='dropdown-button'>
+                Cerrar sesión
+              </button>
+            </>
           ) : (
-            <button onClick={login}>Sign In</button>
+            <button onClick={login} className='dropdown-button'>
+              Ingresar
+            </button>
           )}
         </div>
       )}

@@ -6,8 +6,8 @@ export const genres = [
   'Reggae',
   'Country',
   'R&B (Rhythm and Blues)',
-  'Electrónica (EDM)',
-  'Salsa',
+  'Electrónica',
+  'Soul',
   'Blues',
 ];
 
