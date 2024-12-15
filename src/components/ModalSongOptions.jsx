@@ -2,6 +2,7 @@ import useEditedSong from '../hooksUser/UseEditedSong';
 import { SongEditForm } from './SongEditForm';
 import useDeleteSong from '../hooksUser/UseDeleteSong';
 import ModalDelete from './ModalDelete';
+import '../Modal.css';
 function ModalSongOptions({ song, onClose }) {
   const { handleDelete, isModalOpen, setIsModalOpen } = useDeleteSong();
   const {
@@ -31,7 +32,7 @@ function ModalSongOptions({ song, onClose }) {
 
   return (
     <div className='modal-overlay'>
-      {isEditOpen ? (
+      {isEditOpen && (
         <div className='modal-content'>
           <button className='modal-close' onClick={() => setIsEditOpen(false)}>
             &times;
@@ -45,12 +46,14 @@ function ModalSongOptions({ song, onClose }) {
             setIsEditOpen={setIsEditOpen}
           />
         </div>
-      ) : (
+      )}
+      {!isModalOpen && !isEditOpen && (
         <div className='modal-content'>
           <button className='modal-close' onClick={onClose}>
             &times;
           </button>
-          <h3>{song.title}</h3>
+          <p style={{ fontSize: '24px', marginBottom: '0px' }}>{song.title}</p>
+          <p style={{ fontSize: '16px', marginBottom: '5px' }}>{song.artist}</p>
           <div className='modal-buttons'>
             <button onClick={handleEdit}>Editar</button>
             <button onClick={handleDeleteSong}>Borrar</button>

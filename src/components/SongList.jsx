@@ -34,6 +34,8 @@ function SongList({ songs }) {
                 alignItems: 'center',
                 padding: '5px 0',
                 borderBottom: '1px solid #ccc',
+                textDecoration: 'none',
+                listStyleType: 'none',
               }}
             >
               <Link
@@ -41,6 +43,7 @@ function SongList({ songs }) {
                 style={{
                   textDecoration: 'none',
                   marginRight: '10px',
+                  listStyleType: 'none',
                 }}
               >
                 {song.title} - {song.artist}

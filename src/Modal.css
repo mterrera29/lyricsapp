@@ -55,3 +55,25 @@
 .modal-close:active {
   transform: scale(0.95); /* Efecto de presionar (reduce el tamaño) */
 }
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-buttons button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-buttons button:hover {
+  background-color: #0663c7;
+}
