@@ -15,13 +15,7 @@ const SongContent = ({ activeTab, fontSizeLyrics, fontSizeChords, song }) => {
       }}
       className='custom-quill-editor'
     >
-      {activeTab === 'lyrics' && song.imageUrl ? (
-        <img
-          src={song.imageUrl}
-          alt={song.title}
-          style={{ maxWidth: '100%', height: 'auto', marginTop: '20px' }}
-        />
-      ) : (
+      {activeTab === 'lyrics' &&
         song.lyrics
           .split('<br>') // Divide los párrafos por los saltos de línea
           .map((paragraph, index) => (
@@ -34,8 +28,7 @@ const SongContent = ({ activeTab, fontSizeLyrics, fontSizeChords, song }) => {
               }}
               dangerouslySetInnerHTML={{ __html: paragraph }}
             />
-          ))
-      )}
+          ))}
       {activeTab === 'chords' &&
         (song.chords ? (
           song.chords

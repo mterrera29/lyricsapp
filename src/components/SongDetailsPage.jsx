@@ -92,9 +92,9 @@ function SongDetailsPage() {
       >
         <i className='bi bi-reply-fill'></i>
       </button>
-      <h2 style={{ margin: '0' }}>{song.title}</h2>
-      <h3 style={{ margin: '0' }}>Por: {song.artist}</h3>
-      <p style={{ margin: '0' }}>
+      <h2 style={{ margin: '0', marginRight: '60px' }}>{song.title}</h2>
+      <h3 style={{ margin: '0', marginRight: '60px' }}>Por: {song.artist}</h3>
+      <p style={{ margin: '0', marginRight: '60px' }}>
         <strong>Género:</strong> {song.genre}
       </p>
       <div className='tabs'>
