@@ -84,7 +84,7 @@ const Header = () => {
             navigate('/');
           }}
         >
-          🔥Cancionero🎸
+          🔥 Cancionero 🎸
         </h2>
       </div>
 
