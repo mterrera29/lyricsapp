@@ -8,34 +8,15 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'nowrap',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
       }}
     >
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-        style={{
-          marginTop: '10px',
-          padding: '10px 15px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          marginRight: '10px',
-          width: '50px',
-        }}
-      >
-        <i className='bi bi-reply-fill'></i>
-      </button>
-
       <button
         onClick={() => setIsModalOpen(true)}
         style={{
           marginTop: '10px',
           padding: '10px 15px',
-          backgroundColor: '#007bff',
+          backgroundColor: 'var(--oscuro)',
           color: 'white',
           border: 'none',
           borderRadius: '4px',
@@ -52,7 +33,7 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
         style={{
           marginTop: '10px',
           padding: '10px 15px',
-          backgroundColor: '#007bff',
+          backgroundColor: 'var(--oscuro)',
           color: 'white',
           border: 'none',
           borderRadius: '4px',
@@ -61,6 +42,24 @@ const DetailsButtons = ({ setIsModalOpen, setIsEditOpen }) => {
         }}
       >
         <i className='bi bi-pencil-square'></i>
+      </button>
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+        style={{
+          marginTop: '10px',
+          padding: '10px 15px',
+          backgroundColor: 'var(--oscuro)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          marginRight: '10px',
+          width: '50px',
+        }}
+      >
+        <i className='bi bi-reply-fill'></i>
       </button>
     </div>
   );

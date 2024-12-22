@@ -37,8 +37,9 @@
 
 .tab.active {
   background-color: white; /* Fondo blanco para la pestaña activa */
-  color: #007bff; /* Color primario para texto activo */
+  color: var(--oscuro); /* Color primario para texto activo */
   font-weight: bold;
+  color: var(--oscuro);
 }
 
 .tab:not(.active) {

@@ -84,7 +84,7 @@ const Header = () => {
             navigate('/');
           }}
         >
-          Lyrics App
+          🔥Cancionero🎸
         </h2>
       </div>
 

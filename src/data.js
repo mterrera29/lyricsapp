@@ -10,6 +10,7 @@ export const genres = [
   'Electrónica',
   'Soul',
   'Blues',
+  "Bolero"
 ];
 
 // Configurar los módulos de Quill para incluir las opciones de formateo

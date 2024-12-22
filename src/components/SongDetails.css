@@ -59,7 +59,7 @@
   appearance: none;
   width: 16px;
   height: 16px;
-  background: #007bff;
+  background: var(--oscuro);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -68,7 +68,7 @@
 .scroll-speed-slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
-  background: #007bff;
+  background: var(--oscuro);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;

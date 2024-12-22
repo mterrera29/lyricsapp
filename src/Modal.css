@@ -70,10 +70,10 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  background-color: #007bff;
+  background-color: var(--oscuro);
   color: white;
 }
 
 .modal-buttons button:hover {
-  background-color: #0663c7;
+  background-color: var(--oscuroHover);
 }

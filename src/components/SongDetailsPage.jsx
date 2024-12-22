@@ -74,19 +74,24 @@ function SongDetailsPage() {
         handleSaveEdit={handleSaveEdit}
         activeTab={activeTab}
       />
-      <p
+      <button
         onClick={() => {
           navigate(-1);
         }}
         style={{
-          position: 'absolute',
-          top: '-18px',
-          right: '0',
+          padding: '10px 15px',
+          backgroundColor: 'var(--oscuro)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
           cursor: 'pointer',
+          width: '50px',
+          position: 'absolute',
+          right: '0',
         }}
       >
-        <i className='bi bi-box-arrow-in-left'></i>Mis canciones
-      </p>
+        <i className='bi bi-reply-fill'></i>
+      </button>
       <h2 style={{ margin: '0' }}>{song.title}</h2>
       <h3 style={{ margin: '0' }}>Por: {song.artist}</h3>
       <p style={{ margin: '0' }}>
