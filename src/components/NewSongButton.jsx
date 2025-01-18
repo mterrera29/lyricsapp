@@ -12,15 +12,26 @@ const NewSongButton = () => {
       <button
         onClick={() => setIsModalOpen(true)}
         style={{
-          padding: '10px 15px',
+          width: '60px',
+          height: '60px',
           backgroundColor: 'var(--oscuro)',
           color: 'white',
           border: 'none',
-          borderRadius: '4px',
+          borderRadius: '50%',
           cursor: 'pointer',
+          position: 'fixed', // Cambiado a 'fixed'
+          bottom: '20px',
+          right: '20px',
+          fontSize: '24px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          lineHeight: '1',
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
+          zIndex: '1000', // Asegura que esté por encima de otros elementos
         }}
       >
-        Nueva Canción
+        <i className='bi bi-plus-lg'></i>
       </button>
       {isLoading ? (
         <div className='spinner'>

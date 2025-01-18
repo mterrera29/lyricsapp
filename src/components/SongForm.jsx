@@ -79,7 +79,12 @@ function SongForm({ onCloseModal }) {
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column' }}
+      style={{
+        marginBottom: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        color: 'var(--oscuroLetra)',
+      }}
       className='formulario'
     >
       <p>Título</p>

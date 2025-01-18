@@ -15,6 +15,7 @@
   --claro:rgb(128, 128, 128, .8);
   --oscuro:rgb(8, 90, 86);
   --oscuroHover:rgb(11, 117, 112);
+  --oscuroLetra: #213547;
 }
 
 [data-theme="light"] {

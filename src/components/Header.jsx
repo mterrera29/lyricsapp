@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SongForm from './SongForm';
 import './Header.css';
 import Avatar from './Avatar';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Est
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -51,26 +53,22 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <a
-                href='#'
+              <button
                 onClick={() => {
-                  closeMenu();
-                  navigate('/author');
+                  setIsModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  padding: '10px 15px',
+                  backgroundColor: 'var(--oscuro)',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
                 }}
               >
-                Canciones por Autor
-              </a>
-            </li>
-            <li>
-              <a
-                href='#'
-                onClick={() => {
-                  closeMenu();
-                  navigate('/genre');
-                }}
-              >
-                Canciones por Género
-              </a>
+                Nueva Canción
+              </button>
             </li>
           </ul>
         </nav>
@@ -89,6 +87,23 @@ const Header = () => {
       </div>
 
       <Avatar />
+      {/* Modal */}
+      {isModalOpen && (
+        <div className='modal-overlay'>
+          <div className='modal-content'>
+            <button
+              className='modal-close'
+              onClick={() => setIsModalOpen(false)}
+            >
+              &times;
+            </button>
+            <h2 style={{ color: 'var(--oscuroLetra)' }}>
+              Agregar Nueva Canción
+            </h2>
+            <SongForm onCloseModal={() => setIsModalOpen(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
