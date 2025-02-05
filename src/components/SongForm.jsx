@@ -2,13 +2,15 @@ import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'quill/dist/quill.snow.css'; // Para el tema Snow
-import 'quill/dist/quill.bubble.css'; /// Importa los estilos de Quill
+import 'quill/dist/quill.bubble.css'; // Importa los estilos de Quill
 import './SongForm.css';
 import { genres, modules, formats } from '../data';
-import useCreateSong from '../hooksUser/UseCreateSong';
+import useCreateSong from '../hookUserMd/UseCreateSong';
+import useSongs from '../hookUserMd/useSongs';
 
 function SongForm({ onCloseModal }) {
-  const { createSong, isSubmitting } = useCreateSong();
+  const { setSongs, refetchSongs } = useSongs(); // Obtener setSongs
+  const { createSong, isSubmitting } = useCreateSong(setSongs, refetchSongs);
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [lyrics, setLyrics] = useState('');
@@ -57,7 +59,7 @@ function SongForm({ onCloseModal }) {
       };
 
       try {
-        createSong(newSong);
+        createSong(newSong); // Crear la canción
 
         // Limpiar el formulario
         setArtist('');
@@ -216,7 +218,6 @@ function SongForm({ onCloseModal }) {
       </div>
 
       {/* Tamaño de la fuente */}
-
       <button
         type='submit'
         disabled={isSubmitting}

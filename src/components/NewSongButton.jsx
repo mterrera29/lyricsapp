@@ -1,11 +1,13 @@
 import SongList from './SongList';
 import SongForm from './SongForm';
 import { useState } from 'react';
-import useSongs from '../hooksUser/UseSongs';
+import useSongs from '../hookUserMd/useSongs';
+import { useSongChanged } from '../context/SongProvider';
 
 const NewSongButton = () => {
-  const { songs, isLoading } = useSongs();
+  const { isLoading } = useSongs();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isReload } = useSongChanged();
 
   return (
     <>
@@ -33,12 +35,17 @@ const NewSongButton = () => {
       >
         <i className='bi bi-plus-lg'></i>
       </button>
-      {isLoading ? (
+      <h2
+        style={{ textAlign: 'center', marginTop: '5px', marginBottom: '5px' }}
+      >
+        Mis Canciones
+      </h2>
+      {isLoading || isReload ? (
         <div className='spinner'>
           <div className='spinner-inner'></div>
         </div>
       ) : (
-        <SongList songs={songs} />
+        <SongList />
       )}
       {/* Modal */}
       {isModalOpen && (

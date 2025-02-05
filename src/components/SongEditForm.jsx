@@ -9,8 +9,6 @@ export const SongEditForm = ({
   handleQuillChange,
   handleSaveEdit,
   setIsEditOpen,
-  fontSizeLyrics,
-  fontSizeChords,
 }) => {
   const [activeTab, setActiveTab] = useState('lyrics');
 

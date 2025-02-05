@@ -6,8 +6,8 @@ import ModalDelete from './ModalDelete.jsx';
 import ScrollBar from './ScrollBar.jsx';
 import DetailsButtons from './DetailsButtons.jsx';
 import SongContent from './SongContent.jsx';
-import useEditedSong from '../hooksUser/UseEditedSong.jsx';
-import useDeleteSong from '../hooksUser/UseDeleteSong.jsx';
+import useEditedSong from '../hookUserMd/UseEditedSong.jsx';
+import useDeleteSong from '../hookUserMd/UseDeleteSong.jsx';
 import useWakeLock from '../hooksUser/useWakeLock.jsx';
 
 function SongDetailsPage() {

@@ -10,6 +10,7 @@ export default function useSongs() {
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser);
       setUser(currentUser);
       if (!currentUser) {
         console.error('El usuario no está autenticado');

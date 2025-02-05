@@ -2,55 +2,25 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './SongList.css';
 import ModalSongOptions from './ModalSongOptions';
+import useSongs from '../hookUserMd/useSongs';
 
-function SongList({ songs }) {
+function SongList() {
+  const { songs, isLoading, isFetched } = useSongs();
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  const [searchQuery, setSearchQuery] = useState(''); // Estado para el buscador
+  const [searchQuery, setSearchQuery] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
 
-  // Función para normalizar texto (quitar acentos y convertir a minúsculas)
-  const normalizeText = (text) =>
-    text
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
-
-  // Calcular autores únicos según las canciones disponibles
-  const availableAuthors = [
-    ...new Map(
-      songs
-        .filter(
-          (song) => !selectedGenre || song.genre === selectedGenre // Filtrar por género si está seleccionado
-        )
-        .map((song) => [normalizeText(song.artist), song.artist])
-    ).values(),
-  ];
-
-  // Calcular géneros únicos según las canciones disponibles
-  const availableGenres = [
-    ...new Set(
-      songs
-        .filter(
-          (song) =>
-            !selectedAuthor ||
-            normalizeText(song.artist) === normalizeText(selectedAuthor) // Filtrar por autor si está seleccionado
-        )
-        .map((song) => song.genre)
-    ),
-  ];
-
-  // Filtrar canciones según el autor, el género y la búsqueda
   useEffect(() => {
     const filtered = songs.filter((song) => {
       const matchesAuthor =
         !selectedAuthor ||
-        normalizeText(song.artist) === normalizeText(selectedAuthor);
+        song.artist.toLowerCase() === selectedAuthor.toLowerCase();
       const matchesGenre = !selectedGenre || song.genre === selectedGenre;
       const matchesSearch =
         !searchQuery ||
-        normalizeText(song.title).includes(normalizeText(searchQuery)) ||
-        normalizeText(song.artist).includes(normalizeText(searchQuery));
+        song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        song.artist.toLowerCase().includes(searchQuery.toLowerCase());
 
       return matchesAuthor && matchesGenre && matchesSearch;
     });
@@ -73,11 +43,6 @@ function SongList({ songs }) {
 
   return (
     <div>
-      <h2
-        style={{ textAlign: 'center', marginTop: '5px', marginBottom: '5px' }}
-      >
-        Mis Canciones
-      </h2>
       <div
         style={{
           display: 'flex',
@@ -93,11 +58,13 @@ function SongList({ songs }) {
             onChange={(e) => setSelectedAuthor(e.target.value)}
           >
             <option value=''>Todos los Autores</option>
-            {availableAuthors.map((author, index) => (
-              <option key={index} value={author}>
-                {author}
-              </option>
-            ))}
+            {[...new Set(songs.map((song) => song.artist))].map(
+              (author, index) => (
+                <option key={index} value={author}>
+                  {author}
+                </option>
+              )
+            )}
           </select>
         </div>
         <div>
@@ -106,11 +73,13 @@ function SongList({ songs }) {
             onChange={(e) => setSelectedGenre(e.target.value)}
           >
             <option value=''>Todos los Géneros</option>
-            {availableGenres.map((genre, index) => (
-              <option key={index} value={genre}>
-                {genre}
-              </option>
-            ))}
+            {[...new Set(songs.map((song) => song.genre))].map(
+              (genre, index) => (
+                <option key={index} value={genre}>
+                  {genre}
+                </option>
+              )
+            )}
           </select>
         </div>
       </div>
@@ -134,7 +103,12 @@ function SongList({ songs }) {
           }}
         />
       </div>
-      {songs.length === 0 ? (
+
+      {isLoading ? (
+        <div className='spinner'>
+          <div className='spinner-inner'></div>
+        </div>
+      ) : isFetched && songs.length === 0 ? (
         <p>No hay canciones aún.</p>
       ) : (
         <ul className='songList'>
@@ -171,6 +145,7 @@ function SongList({ songs }) {
           ))}
         </ul>
       )}
+
       {modalData.isOpen && (
         <ModalSongOptions song={modalData.selectedSong} onClose={closeModal} />
       )}

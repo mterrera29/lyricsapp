@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SongForm from './SongForm';
 import './Header.css';
 import Avatar from './Avatar';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Est
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -16,6 +16,20 @@ const Header = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    // Bloquear scroll al abrir el menú
+    if (isMenuOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    // Limpiar efecto al desmontar el componente
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [isMenuOpen]);
 
   return (
     <div className='app-header'>
@@ -30,17 +44,6 @@ const Header = () => {
       <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
         <nav>
           <ul>
-            <li>
-              <a
-                href='#'
-                onClick={() => {
-                  closeMenu();
-                  navigate('/');
-                }}
-              >
-                Inicio
-              </a>
-            </li>
             <li>
               <a
                 href='#'
@@ -69,6 +72,17 @@ const Header = () => {
               >
                 Nueva Canción
               </button>
+            </li>
+            <li>
+              <a
+                href='#'
+                onClick={() => {
+                  closeMenu();
+                  navigate('/lists');
+                }}
+              >
+                Listas
+              </a>
             </li>
           </ul>
         </nav>

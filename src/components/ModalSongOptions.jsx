@@ -1,6 +1,6 @@
-import useEditedSong from '../hooksUser/UseEditedSong';
+import useEditedSong from '../hookUserMd/UseEditedSong';
 import { SongEditForm } from './SongEditForm';
-import useDeleteSong from '../hooksUser/UseDeleteSong';
+import useDeleteSong from '../hookUserMd/UseDeleteSong';
 import ModalDelete from './ModalDelete';
 import '../Modal.css';
 function ModalSongOptions({ song, onClose }) {
