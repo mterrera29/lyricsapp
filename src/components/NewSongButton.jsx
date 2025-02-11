@@ -1,11 +1,20 @@
 import SongList from './SongList';
 import SongForm from './SongForm';
 import { useState } from 'react';
-import useSongs from '../hookUserMd/useSongs';
 import { useSongChanged } from '../context/SongProvider';
 
-const NewSongButton = () => {
-  const { isLoading } = useSongs();
+const NewSongButton = ({
+  isLoading,
+  songs,
+  isFetched,
+  setSongs,
+  refetchSongs,
+  refetchLists,
+  lists,
+  setLists,
+  isLoadingLists,
+  isFetchedLists,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isReload } = useSongChanged();
 
@@ -45,7 +54,17 @@ const NewSongButton = () => {
           <div className='spinner-inner'></div>
         </div>
       ) : (
-        <SongList />
+        <SongList
+          songs={songs}
+          isLoading={isLoading}
+          isFetched={isFetched}
+          refetchSongs={refetchSongs}
+          lists={lists}
+          isLoadingLists={isLoadingLists}
+          isFetchedLists={isFetchedLists}
+          setLists={setLists}
+          refetchLists={refetchLists}
+        />
       )}
       {/* Modal */}
       {isModalOpen && (
@@ -58,7 +77,11 @@ const NewSongButton = () => {
               &times;
             </button>
             <h2>Agregar Nueva Canción</h2>
-            <SongForm onCloseModal={() => setIsModalOpen(false)} />
+            <SongForm
+              setSongs={setSongs}
+              refetchSongs={refetchSongs}
+              onCloseModal={() => setIsModalOpen(false)}
+            />
           </div>
         </div>
       )}

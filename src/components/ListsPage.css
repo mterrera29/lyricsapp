@@ -1,5 +1,9 @@
 .lists-page {
-  padding: 20px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-list-btn {
@@ -15,6 +19,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .list-item {

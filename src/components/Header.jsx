@@ -52,7 +52,18 @@ const Header = () => {
                   navigate('/');
                 }}
               >
-                Mis Canciones
+                Mis Canciones 🎶
+              </a>
+            </li>
+            <li>
+              <a
+                href='#'
+                onClick={() => {
+                  closeMenu();
+                  navigate('/lists');
+                }}
+              >
+                Mis Listas 📝
               </a>
             </li>
             <li>
@@ -70,19 +81,8 @@ const Header = () => {
                   cursor: 'pointer',
                 }}
               >
-                Nueva Canción
+                Nueva Canción 🎵
               </button>
-            </li>
-            <li>
-              <a
-                href='#'
-                onClick={() => {
-                  closeMenu();
-                  navigate('/lists');
-                }}
-              >
-                Listas
-              </a>
             </li>
           </ul>
         </nav>

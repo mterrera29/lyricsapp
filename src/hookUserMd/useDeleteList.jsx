@@ -2,14 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Cambiamos Firebase por Axios
 import { auth } from '../components/firebase'; // Importamos auth para obtener el usuario
-import { useSongChanged } from '../context/SongProvider';
 
-const useDeleteSong = (refetchSongs, refetchLists, refetchListsSongs) => {
+const useDeleteList = (refetchLists, refetchSongs, refetchListsSongs) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setIsOnSongChanged } = useSongChanged();
   const navigate = useNavigate();
 
-  const handleDelete = async (id) => {
+  const handleDeleteList = async (id) => {
     const user = auth.currentUser; // Usuario autenticado
     const token = await user.getIdToken();
     if (!user) {
@@ -19,7 +17,7 @@ const useDeleteSong = (refetchSongs, refetchLists, refetchListsSongs) => {
 
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/users/${user.uid}/songs/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/users/${user.uid}/lists/${id}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -27,20 +25,22 @@ const useDeleteSong = (refetchSongs, refetchLists, refetchListsSongs) => {
           },
         }
       );
-      setIsModalOpen(false);
-      setIsOnSongChanged(true);
-      navigate(-1);
-      refetchSongs();
+      if (refetchSongs) {
+        refetchSongs();
+      }
       refetchLists();
+
       if (refetchListsSongs) {
         refetchListsSongs();
       }
+      setIsModalOpen(false);
+      navigate('/lists');
     } catch (error) {
       console.error('Error al eliminar la canción:', error);
     }
   };
 
-  return { handleDelete, isModalOpen, setIsModalOpen };
+  return { handleDeleteList, isModalOpen, setIsModalOpen };
 };
 
-export default useDeleteSong;
+export default useDeleteList;

@@ -1,66 +1,63 @@
-import { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db, auth } from '../components/firebase'; // Configuración de Firebase
+import { useState } from 'react'; // Configuración de Firebase
 import './ListsPage.css';
+import useCreateList from '../hookUserMd/useCreateLists';
+import ModalListOptions from './ModalListOptions';
+import { Link } from 'react-router-dom';
 
-const ListsPage = () => {
-  const [lists, setLists] = useState([]);
+const ListsPage = ({
+  lists,
+  isLoadingLists,
+  isFetchedLists,
+  setLists,
+  refetchLists,
+}) => {
   const [newListName, setNewListName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { createList } = useCreateList(setLists, refetchLists);
+  const [modalData, setModalData] = useState({
+    isOpen: false,
+    selectedSong: null,
+  });
 
-  useEffect(() => {
-    const fetchLists = async () => {
-      const user = auth.currentUser; // Usuario autenticado
-      if (!user) {
-        console.error('El usuario no está autenticado');
-        return;
-      }
+  const openModal = (list) => {
+    setModalData({ isOpen: true, selectedSong: list });
+  };
+
+  const closeModal = () => {
+    setModalData({ isOpen: false, selectedSong: null });
+  };
+
+  const handleCreateList = async (e) => {
+    e.preventDefault();
+
+    if (newListName) {
+      const newList = {
+        newListName, // Guardamos el tamaño de la fuente
+      };
 
       try {
-        const userListsRef = collection(db, `users/${user.uid}/lists`); // Subcolección de listas del usuario
-        const querySnapshot = await getDocs(userListsRef);
-        const fetchedLists = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setLists(fetchedLists);
+        createList(newList);
+        setNewListName('');
+        setIsModalOpen(false);
       } catch (error) {
-        console.error('Error al cargar las listas:', error);
+        console.error('Error al agregar la canción: ', error);
       }
-    };
-
-    fetchLists();
-  }, []);
-
-  const createList = async () => {
-    if (!newListName.trim()) return;
-
-    const user = auth.currentUser; // Usuario autenticado
-    if (!user) {
-      console.error('El usuario no está autenticado');
-      return;
-    }
-
-    try {
-      const userListsRef = collection(db, `users/${user.uid}/lists`); // Subcolección de listas del usuario
-      const docRef = await addDoc(userListsRef, {
-        name: newListName,
-        songs: [], // Inicializa la lista con un array vacío de canciones
-      });
-
-      setLists([...lists, { id: docRef.id, name: newListName, songs: [] }]);
-      setNewListName('');
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error('Error al crear la lista:', error);
     }
   };
 
   return (
     <div className='lists-page'>
-      <h1>Mis Listas</h1>
-      <button className='create-list-btn' onClick={() => setIsModalOpen(true)}>
-        Nueva Lista
+      <h2
+        style={{ textAlign: 'center', marginTop: '5px', marginBottom: '5px' }}
+      >
+        Mis Listas
+      </h2>
+      <button
+        style={{ textAlign: 'center', marginTop: '5px', marginBottom: '5px' }}
+        className='create-list-btn'
+        onClick={() => setIsModalOpen(true)}
+      >
+        Nueva Lista 📝
       </button>
 
       {isModalOpen && (
@@ -79,22 +76,60 @@ const ListsPage = () => {
               onChange={(e) => setNewListName(e.target.value)}
               placeholder='Nombre de la lista'
             />
-            <button onClick={createList}>Crear</button>
+            <button onClick={handleCreateList}>Crear</button>
           </div>
         </div>
       )}
-
-      <div className='lists-container'>
-        {lists.map((list) => (
-          <div
-            key={list.id}
-            className='list-item'
-            onClick={() => (window.location.href = `/list/${list.id}`)} // Cambiar a una ruta específica
-          >
-            {list.name}
-          </div>
-        ))}
-      </div>
+      {isLoadingLists ? (
+        <div className='spinner'>
+          <div className='spinner-inner'></div>
+        </div>
+      ) : isFetchedLists && lists.length === 0 ? (
+        <p>No hay listas aún.</p>
+      ) : (
+        <div>
+          <ul className='songList'>
+            {lists.map((list) => (
+              <li
+                key={list.id}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '5px 0',
+                  borderBottom: '1px solid #ccc',
+                  textDecoration: 'none',
+                  listStyleType: 'none',
+                }}
+                className='songs'
+              >
+                <Link
+                  to={`/list/${list.id}`}
+                  style={{
+                    textDecoration: 'none',
+                    marginRight: '10px',
+                    listStyleType: 'none',
+                  }}
+                >
+                  📝 {list.name}
+                </Link>
+                <i
+                  className='bi bi-pencil-square'
+                  style={{ fontSize: '20px', cursor: 'pointer' }}
+                  onClick={() => openModal(list)}
+                ></i>
+              </li>
+            ))}
+          </ul>
+          {modalData.isOpen && (
+            <ModalListOptions
+              list={modalData.selectedSong}
+              onClose={closeModal}
+              refetchLists={refetchLists}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };

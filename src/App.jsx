@@ -13,9 +13,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import ListsPage from './components/ListsPage';
 import ListDetailPage from './components/ListDetailPage';
 import { SongProvider } from './context/SongProvider';
+import useLists from './hookUserMd/useLists';
 
 function App() {
-  const { songs, isLoading } = useSongs();
+  const { songs, isLoading, isFetched, setSongs, refetchSongs } = useSongs();
+  const { lists, isLoadingLists, isFetchedLists, setLists, refetchLists } =
+    useLists();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'light');
@@ -30,7 +33,20 @@ function App() {
             <Routes>
               <Route
                 path='/'
-                element={<NewSongButton songs={songs} isLoading={isLoading} />}
+                element={
+                  <NewSongButton
+                    songs={songs}
+                    isLoading={isLoading}
+                    isFetched={isFetched}
+                    setSongs={setSongs}
+                    refetchSongs={refetchSongs}
+                    lists={lists}
+                    isLoadingLists={isLoadingLists}
+                    isFetchedLists={isFetchedLists}
+                    setLists={setLists}
+                    refetchLists={refetchLists}
+                  />
+                }
               />
               <Route
                 path='/genre'
@@ -38,14 +54,41 @@ function App() {
               />
               <Route
                 path='/author'
-                element={<SongsByAuthor songs={songs} isLoading={isLoading} />}
+                element={
+                  <SongsByAuthor songs={songs} refetchSongs={refetchSongs} />
+                }
               />
               <Route
                 path='/song/:id'
-                element={<SongDetailsPage songs={songs} />}
+                element={
+                  <SongDetailsPage songs={songs} refetchSongs={refetchSongs} />
+                }
               />
-              <Route path='/lists' element={<ListsPage />} />
-              <Route path='/list/:listId' element={<ListDetailPage />} />
+              <Route
+                path='/lists'
+                element={
+                  <ListsPage
+                    lists={lists}
+                    isLoadingLists={isLoadingLists}
+                    isFetchedLists={isFetchedLists}
+                    setLists={setLists}
+                    refetchLists={refetchLists}
+                  />
+                }
+              />
+              <Route
+                path='/list/:listId'
+                element={
+                  <ListDetailPage
+                    lists={lists}
+                    isLoadingLists={isLoadingLists}
+                    isFetchedLists={isFetchedLists}
+                    setLists={setLists}
+                    refetchLists={refetchLists}
+                    refetchSongs={refetchSongs}
+                  />
+                }
+              />
             </Routes>
           </div>
         </SongProvider>

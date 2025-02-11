@@ -3,7 +3,7 @@ import axios from 'axios'; // Asegúrate de tener axios instalado
 import { auth } from '../components/firebase'; // Importa la instancia de autenticación
 import { useSongChanged } from '../context/SongProvider';
 
-const useEditedSong = (id) => {
+const useEditedSong = (id, refetchSongs, refetchLists) => {
   const [song, setSong] = useState(null);
   const [editedSong, setEditedSong] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -69,6 +69,10 @@ const useEditedSong = (id) => {
       setEditedSong(response.data);
       setIsOnSongChanged(true);
       setIsEditOpen(false);
+      refetchSongs();
+      if (refetchLists) {
+        refetchLists();
+      }
       console.log('Cambios guardados exitosamente');
     } catch (error) {
       console.error('Error al guardar los cambios:', error);

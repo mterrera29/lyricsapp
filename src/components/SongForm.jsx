@@ -6,10 +6,9 @@ import 'quill/dist/quill.bubble.css'; // Importa los estilos de Quill
 import './SongForm.css';
 import { genres, modules, formats } from '../data';
 import useCreateSong from '../hookUserMd/UseCreateSong';
-import useSongs from '../hookUserMd/useSongs';
+import { useNavigate } from 'react-router-dom';
 
-function SongForm({ onCloseModal }) {
-  const { setSongs, refetchSongs } = useSongs(); // Obtener setSongs
+function SongForm({ onCloseModal, setSongs, refetchSongs }) {
   const { createSong, isSubmitting } = useCreateSong(setSongs, refetchSongs);
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
@@ -23,6 +22,7 @@ function SongForm({ onCloseModal }) {
   const [scrollSpeedLyrics, setScrollSpeedLyrics] = useState(0.5); // Velocidad inicial centrada
   const [scrollSpeedChords, setScrollSpeedChords] = useState(0.5); // Velocidad inicial centrada
   const [activeTab, setActiveTab] = useState('lyrics');
+  const navigate = useNavigate();
 
   // Función para manejar el cambio en la velocidad de desplazamiento
   const handleSpeedChange = (e) => {
@@ -71,6 +71,7 @@ function SongForm({ onCloseModal }) {
         setFontSize(16); // Restablecer font size
 
         // Cerrar el modal después de actualizar la lista
+        navigate('/');
         onCloseModal();
       } catch (error) {
         console.error('Error al agregar la canción: ', error);

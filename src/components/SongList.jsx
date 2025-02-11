@@ -1,15 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './SongList.css';
 import ModalSongOptions from './ModalSongOptions';
-import useSongs from '../hookUserMd/useSongs';
+import FilteredSongs from './FilteredSongs';
 
-function SongList() {
-  const { songs, isLoading, isFetched } = useSongs();
+function SongList({
+  songs,
+  isLoading,
+  isFetched,
+  refetchSongs,
+  lists,
+  isLoadingLists,
+  isFetchedLists,
+  setLists,
+  refetchLists,
+}) {
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
+  const [modalData, setModalData] = useState({
+    isOpen: false,
+    selectedSong: null,
+  });
 
   useEffect(() => {
     const filtered = songs.filter((song) => {
@@ -27,11 +39,6 @@ function SongList() {
 
     setFilteredSongs(filtered);
   }, [selectedAuthor, selectedGenre, searchQuery, songs]);
-
-  const [modalData, setModalData] = useState({
-    isOpen: false,
-    selectedSong: null,
-  });
 
   const openModal = (song) => {
     setModalData({ isOpen: true, selectedSong: song });
@@ -111,43 +118,20 @@ function SongList() {
       ) : isFetched && songs.length === 0 ? (
         <p>No hay canciones aún.</p>
       ) : (
-        <ul className='songList'>
-          {filteredSongs.map((song) => (
-            <li
-              className='songs'
-              key={song.id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '5px 0',
-                borderBottom: '1px solid #ccc',
-                textDecoration: 'none',
-                listStyleType: 'none',
-              }}
-            >
-              <Link
-                to={`/song/${song.id}`}
-                style={{
-                  textDecoration: 'none',
-                  marginRight: '10px',
-                  listStyleType: 'none',
-                }}
-              >
-                {song.title} - {song.artist}
-              </Link>
-              <i
-                className='bi bi-pencil-square'
-                style={{ fontSize: '20px', cursor: 'pointer' }}
-                onClick={() => openModal(song)}
-              ></i>
-            </li>
-          ))}
-        </ul>
+        <FilteredSongs songs={filteredSongs} openModal={openModal} />
       )}
 
       {modalData.isOpen && (
-        <ModalSongOptions song={modalData.selectedSong} onClose={closeModal} />
+        <ModalSongOptions
+          song={modalData.selectedSong}
+          onClose={closeModal}
+          refetchSongs={refetchSongs}
+          lists={lists}
+          isLoadingLists={isLoadingLists}
+          isFetchedLists={isFetchedLists}
+          setLists={setLists}
+          refetchLists={refetchLists}
+        />
       )}
     </div>
   );

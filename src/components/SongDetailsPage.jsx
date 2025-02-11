@@ -10,7 +10,7 @@ import useEditedSong from '../hookUserMd/UseEditedSong.jsx';
 import useDeleteSong from '../hookUserMd/UseDeleteSong.jsx';
 import useWakeLock from '../hooksUser/useWakeLock.jsx';
 
-function SongDetailsPage() {
+function SongDetailsPage({ refetchSongs }) {
   const { id } = useParams();
   const {
     song,
@@ -20,8 +20,9 @@ function SongDetailsPage() {
     handleQuillChange,
     isEditOpen,
     setIsEditOpen,
-  } = useEditedSong(id);
-  const { handleDelete, isModalOpen, setIsModalOpen } = useDeleteSong();
+  } = useEditedSong(id, refetchSongs);
+  const { handleDelete, isModalOpen, setIsModalOpen } =
+    useDeleteSong(refetchSongs);
   const [fontSizeLyrics, setFontSizeLyrics] = useState(16);
   const [fontSizeChords, setFontSizeChords] = useState(16);
   const [activeTab, setActiveTab] = useState('lyrics');
