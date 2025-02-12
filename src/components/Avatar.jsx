@@ -9,10 +9,6 @@ const Avatar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
   return (
     <>
       {/* Avatar del usuario */}
