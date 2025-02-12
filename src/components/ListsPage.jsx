@@ -62,7 +62,16 @@ const ListsPage = ({
 
       {isModalOpen && (
         <div className='modal-overlay'>
-          <div className='modal-content'>
+          <div
+            className='modal-content'
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
             <button
               className='modal-close'
               onClick={() => setIsModalOpen(false)}
@@ -76,7 +85,17 @@ const ListsPage = ({
               onChange={(e) => setNewListName(e.target.value)}
               placeholder='Nombre de la lista'
             />
-            <button onClick={handleCreateList}>Crear</button>
+            <button
+              style={{
+                textAlign: 'center',
+                marginTop: '5px',
+                marginBottom: '5px',
+              }}
+              className='create-list-btn'
+              onClick={handleCreateList}
+            >
+              Crear
+            </button>
           </div>
         </div>
       )}
