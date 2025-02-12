@@ -5,7 +5,7 @@ import ModalDelete from './ModalDelete';
 import '../Modal.css';
 import { useState } from 'react';
 import useAddSongToList from '../hookUserMd/useAddSongToList';
-import useRemoveSongFromList from '../hookUserMd/useRemoveSongFromList';
+import useRemoveSongFromList from '../hookUserMd/useRemoveSongForList';
 
 function ModalSongOptions({
   song,
