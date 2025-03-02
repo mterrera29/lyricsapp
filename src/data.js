@@ -1,7 +1,9 @@
 export const genres = [
-  "Ninguno",
+  'Ninguno',
   'Pop',
   'Rock',
+  'Folk',
+  'Folklore',
   'Hip-Hop/Rap',
   'Jazz',
   'Reggae',
@@ -10,7 +12,7 @@ export const genres = [
   'Electrónica',
   'Soul',
   'Blues',
-  "Bolero"
+  'Bolero',
 ];
 
 // Configurar los módulos de Quill para incluir las opciones de formateo
@@ -33,4 +35,3 @@ export const formats = [
   'background',
   'align', // Habilitar line-height
 ];
-
