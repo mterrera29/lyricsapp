@@ -16,34 +16,30 @@ const SongContent = ({ activeTab, fontSizeLyrics, fontSizeChords, song }) => {
       className='custom-quill-editor'
     >
       {activeTab === 'lyrics' &&
-        song.lyrics
-          .split('<br>') // Divide los párrafos por los saltos de línea
-          .map((paragraph, index) => (
+        song.lyrics.split('<br>').map((paragraph, index) => (
+          <p
+            key={index}
+            style={{
+              backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff',
+              padding: '5px',
+              borderRadius: '4px',
+            }}
+            dangerouslySetInnerHTML={{ __html: paragraph }}
+          />
+        ))}
+      {activeTab === 'chords' &&
+        (song.chords ? (
+          song.chords.split('<br>').map((paragraph, index) => (
             <p
               key={index}
               style={{
-                backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff', // Alterna el color
+                backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff',
                 padding: '5px',
                 borderRadius: '4px',
               }}
               dangerouslySetInnerHTML={{ __html: paragraph }}
             />
-          ))}
-      {activeTab === 'chords' &&
-        (song.chords ? (
-          song.chords
-            .split('<br>') // Divide los acordes por los saltos de línea
-            .map((paragraph, index) => (
-              <p
-                key={index}
-                style={{
-                  backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#ffffff', // Alterna el color
-                  padding: '5px',
-                  borderRadius: '4px',
-                }}
-                dangerouslySetInnerHTML={{ __html: paragraph }}
-              />
-            ))
+          ))
         ) : (
           <p style={{ color: '#888', fontStyle: 'italic' }}>
             No hay acordes disponibles.

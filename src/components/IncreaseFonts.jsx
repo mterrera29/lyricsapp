@@ -6,27 +6,25 @@ const IncreaseFonts = ({
   fontSizeLyrics,
   fontSizeChords,
 }) => {
-  // Función para aumentar el tamaño de la letra
   const increaseFontSize = () => {
     if (activeTab === 'lyrics') {
-      const newFontSize = Math.min(fontSizeLyrics + 2, 32); // Máximo 32
+      const newFontSize = Math.min(fontSizeLyrics + 2, 32);
       setFontSizeLyrics(newFontSize);
       handleChange({ target: { name: 'fontSizeLyrics', value: newFontSize } });
     } else {
-      const newFontSize = Math.min(fontSizeChords + 2, 32); // Máximo 32
+      const newFontSize = Math.min(fontSizeChords + 2, 32);
       setFontSizeChords(newFontSize);
       handleChange({ target: { name: 'fontSizeChords', value: newFontSize } });
     }
   };
 
-  // Función para disminuir el tamaño de la letra
   const decreaseFontSize = () => {
     if (activeTab === 'lyrics') {
-      const newFontSize = Math.max(fontSizeLyrics - 2, 12); // Mínimo 12
+      const newFontSize = Math.max(fontSizeLyrics - 2, 12);
       setFontSizeLyrics(newFontSize);
       handleChange({ target: { name: 'fontSizeLyrics', value: newFontSize } });
     } else {
-      const newFontSize = Math.max(fontSizeChords - 2, 12); // Mínimo 12
+      const newFontSize = Math.max(fontSizeChords - 2, 12);
       setFontSizeChords(newFontSize);
       handleChange({ target: { name: 'fontSizeChords', value: newFontSize } });
     }

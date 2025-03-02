@@ -8,7 +8,6 @@
 @media (max-width: 768px) {
 }
 
-/* Media query para pantallas muy pequeñas (por ejemplo, < 480px) */
 @media (max-width: 480px) {
   .songList {
     width: 100%;

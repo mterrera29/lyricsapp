@@ -1,20 +1,18 @@
-
-.custom-quill-editor{
+.custom-quill-editor {
   width: 600px;
 }
 .custom-quill-editor p {
-  margin: 0; /* Opcional: puedes ajustar los márgenes */
-  padding: 0; /* Opcional: si quieres remover padding específico */
+  margin: 0;
+  padding: 0;
   line-height: 1 !important;
 }
 .custom-quill-editor p {
-  margin-bottom: 10px; /* Espacio entre los párrafos */
+  margin-bottom: 10px;
 }
 .custom-quill-editor br {
-  line-height: 1.5; /* Asegurar que los saltos de línea tengan un espaciado adecuado */
+  line-height: 1.5;
 }
 
-/* Tamaños de texto */
 .ql-size-small {
   font-size: 0.75em;
 }
@@ -28,25 +26,24 @@
 }
 
 .scroll-controls {
-  position: fixed; /* Fija la barra al fondo */
-  bottom: 0; /* Pegada al borde inferior */
-  left: 0; /* Extiende desde el lado izquierdo */
-  width: 100%; /* Cubre todo el ancho de la pantalla */
-  height: 50px; /* Ajusta la altura según prefieras */
-  background-color: #f0f0f0; /* Fondo sólido, ajusta según tu diseño */
-  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
-  display: flex; /* Para alinear elementos dentro de la barra */
-  align-items: center; /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-  z-index: 1000; /* Asegura que esté por encima del contenido principal */
-  border-top: 1px solid #ccc; /* Línea superior como separación */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #f0f0f0;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-top: 1px solid #ccc;
 }
 
-/* Estilo general para la barra de rango */
 .scroll-speed-slider {
-  width: 200px; /* Ancho predeterminado */
+  width: 200px;
   height: 6px;
-  -webkit-appearance: none; /* Quitar estilos predeterminados */
+  -webkit-appearance: none;
   appearance: none;
   background: #ccc;
   border-radius: 4px;
@@ -74,14 +71,12 @@
   transition: all 0.3s ease-in-out;
 }
 .scroll-speed-slider {
-  touch-action: none; /* Evita que el deslizamiento táctil genere scroll */
+  touch-action: none;
 }
 
-
-/* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
   .scroll-speed-slider {
-    width: 150px; /* Reducir el ancho para pantallas móviles */
+    width: 150px;
     height: 5px;
   }
 
@@ -90,15 +85,14 @@
     width: 14px;
     height: 14px;
   }
-  .custom-quill-editor{
+  .custom-quill-editor {
     width: 80vw;
   }
 }
 
-/* Media query para pantallas muy pequeñas (por ejemplo, < 480px) */
 @media (max-width: 480px) {
   .scroll-speed-slider {
-    width: 90px; /* Ajuste adicional para pantallas muy pequeñas */
+    width: 90px;
   }
 
   .scroll-speed-slider::-webkit-slider-thumb,
@@ -106,7 +100,7 @@
     width: 12px;
     height: 12px;
   }
-  .custom-quill-editor{
+  .custom-quill-editor {
     width: 100%;
     min-width: 95vw;
   }

@@ -17,10 +17,10 @@ const ScrollBar = ({
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollSpeedLyrics, setScrollSpeedLyrics] = useState(
     song?.scrollSpeed || (minSpeed + maxSpeed) / 3
-  ); // Velocidad inicial centrada
+  );
   const [scrollSpeedChords, setScrollSpeedChords] = useState(
     song?.scrollSpeed || (minSpeed + maxSpeed) / 3
-  ); // Velocidad inicial centrada
+  );
   const scrollInterval = useRef(null);
   const scrollAccumulator = useRef(0);
 
@@ -68,14 +68,13 @@ const ScrollBar = ({
     const newSpeed = Number(e.target.value);
 
     if (activeTab === 'lyrics') {
-      setScrollSpeedLyrics(newSpeed); // Actualiza la velocidad para la sección de letras
+      setScrollSpeedLyrics(newSpeed);
       handleChange({ target: { name: 'scrollSpeedLyrics', value: newSpeed } });
     } else {
-      setScrollSpeedChords(newSpeed); // Actualiza la velocidad para la sección de acordes
+      setScrollSpeedChords(newSpeed);
       handleChange({ target: { name: 'scrollSpeedChords', value: newSpeed } });
     }
 
-    // Propaga el cambio al manejar el cambio global del formulario
     handleChange({ target: { name: 'scrollSpeed', value: newSpeed } });
   };
 

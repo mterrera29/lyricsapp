@@ -42,18 +42,15 @@ function ModalSongOptions({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEdit = () => {
-    // Acción para editar la canción
     setIsEditOpen(true);
   };
 
   const handleDeleteSong = () => {
-    // Acción para borrar la canción
     console.log(`Borrar canción: ${song.title}`);
     setIsModalOpen(true);
   };
 
   const handleDeleteListSong = () => {
-    // Acción para borrar la canción
     console.log(`Borrar canción de la lista: ${song.title}`);
     setIsModalOpen(true);
   };

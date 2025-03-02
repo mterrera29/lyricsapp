@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SongsByGenre = ({ songs }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
 
-  // Obtener géneros únicos
   const genres = [...new Set(songs.map((song) => song.genre))];
 
   useEffect(() => {
     if (selectedGenre) {
       setFilteredSongs(songs.filter((song) => song.genre === selectedGenre));
     } else {
-      setFilteredSongs(songs); // Mostrar todas si no hay filtro
+      setFilteredSongs(songs);
     }
   }, [selectedGenre, songs]);
 
@@ -35,7 +34,7 @@ const SongsByGenre = ({ songs }) => {
       <ul>
         {filteredSongs.map((song) => (
           <li
-            key={song.id} // Usamos el id de Firebase como clave
+            key={song.id}
             style={{
               padding: '5px 0',
               borderBottom: '1px solid #ccc',

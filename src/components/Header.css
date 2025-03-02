@@ -1,6 +1,5 @@
-/* Barra superior */
 .app-header {
-  position: relative; /* Se establece el contenedor en posición relativa para que los elementos internos puedan ser posicionados de forma absoluta */
+  position: relative;
   top: 0;
   left: 0;
   background-color: var(--oscuro);
@@ -12,28 +11,23 @@
   width: 100%;
   box-sizing: border-box;
   border-bottom: 2px solid var(--oscuroHover);
-  height: 50px; /* Establecer una altura fija para el header */
+  height: 50px;
 }
 
-/* Contenedor del título */
 .title-container {
-  flex-grow: 1; /* Esto permite que el contenedor del título crezca para ocupar el espacio disponible */
+  flex-grow: 1;
   display: flex;
-  justify-content: center; /* Centra el título */
-  align-items: center; /* Centra el título verticalmente */
-  position: absolute; /* Permite que el contenedor del título esté centrado independientemente */
+  justify-content: center;
+  align-items: center;
+  position: absolute;
   left: 0;
   right: 0;
-  
 }
 
-/* Título */
 .title {
   margin: 0;
 }
 
-/* Menú hamburguesa */
-/* Estilos para el botón de hamburguesa */
 .hamburger-menu {
   display: flex;
   flex-direction: column;
@@ -41,7 +35,7 @@
   width: 30px;
   height: 25px;
   cursor: pointer;
-  z-index: 1002; /* Asegúrate de que esté encima del contenido */
+  z-index: 1002;
 }
 
 .bar {
@@ -64,14 +58,14 @@
 }
 
 .side-menu {
-  position: fixed; /* Cambia de absolute a fixed para evitar problemas de reposicionamiento */
+  position: fixed;
   top: 0;
-  left: -100%; /* Inicialmente fuera de la pantalla */
+  left: -100%;
   width: 25%;
-  height: 100%; /* Asegúrate de que la altura sea constante */
+  height: 100%;
   background-color: var(--oscuroHover);
   color: white;
-  transition: left 0.3s ease; /* Solo aplica transición a la propiedad left */
+  transition: left 0.3s ease;
   padding: 20px;
   padding-top: 50px;
   z-index: 1001;
@@ -79,7 +73,7 @@
 }
 
 .side-menu.open {
-  left: 0; /* Mueve el menú a la posición visible */
+  left: 0;
 }
 
 .side-menu nav ul {
@@ -99,7 +93,7 @@
 .close-btn {
   background-color: transparent;
   color: white;
-  font-size:30px;
+  font-size: 30px;
   border: none;
   cursor: pointer;
   position: absolute;
@@ -109,7 +103,6 @@
   height: 50px;
 }
 
-/* Estilo de cada barra del menú hamburguesa */
 .hamburger-icon {
   background-color: white;
   height: 5px;
@@ -117,9 +110,8 @@
   border-radius: 3px;
 }
 
-/* Efectos al hacer clic en el menú */
 .hamburger-menu:hover .hamburger-icon {
-  background-color: #ddd; /* Cambia el color de las barras cuando el usuario pasa el mouse */
+  background-color: #ddd;
 }
 
 .user-avatar {
@@ -192,5 +184,5 @@
 
 .no-scroll {
   overflow: hidden;
-  height: 100vh; /* Evita el desplazamiento vertical */
+  height: 100vh;
 }

@@ -30,7 +30,7 @@ const NewSongButton = ({
           border: 'none',
           borderRadius: '50%',
           cursor: 'pointer',
-          position: 'fixed', // Cambiado a 'fixed'
+          position: 'fixed',
           bottom: '20px',
           right: '20px',
           fontSize: '24px',
@@ -39,7 +39,7 @@ const NewSongButton = ({
           alignItems: 'center',
           lineHeight: '1',
           boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
-          zIndex: '999', // Asegura que esté por encima de otros elementos
+          zIndex: '999',
         }}
       >
         <i className='bi bi-plus-lg'></i>

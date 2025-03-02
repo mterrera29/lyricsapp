@@ -18,14 +18,12 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // Bloquear scroll al abrir el menú
     if (isMenuOpen) {
       document.body.classList.add('no-scroll');
     } else {
       document.body.classList.remove('no-scroll');
     }
 
-    // Limpiar efecto al desmontar el componente
     return () => {
       document.body.classList.remove('no-scroll');
     };
@@ -33,14 +31,12 @@ const Header = () => {
 
   return (
     <div className='app-header'>
-      {/* Botón del menú hamburguesa */}
       <div className='hamburger-menu' onClick={toggleMenu}>
         <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
         <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
         <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
       </div>
 
-      {/* Menú lateral */}
       <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
         <nav>
           <ul>

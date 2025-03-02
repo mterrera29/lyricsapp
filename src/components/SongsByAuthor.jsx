@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SongsByAuthor = ({ songs }) => {
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [filteredSongs, setFilteredSongs] = useState([]);
 
-  // Función para normalizar texto (quitar acentos y convertir a minúsculas)
   const normalizeText = (text) =>
     text
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase();
 
-  // Obtener autores únicos manteniendo el formato original
   const authors = [
     ...new Map(
       songs.map((song) => [normalizeText(song.artist), song.artist])
@@ -27,7 +25,7 @@ const SongsByAuthor = ({ songs }) => {
         )
       );
     } else {
-      setFilteredSongs(songs); // Mostrar todas si no hay filtro
+      setFilteredSongs(songs);
     }
   }, [selectedAuthor, songs]);
 
@@ -50,7 +48,7 @@ const SongsByAuthor = ({ songs }) => {
       <ul>
         {filteredSongs.map((song) => (
           <li
-            key={song.id} // Usamos el id de Firebase como clave
+            key={song.id}
             style={{
               padding: '5px 0',
               borderBottom: '1px solid #ccc',

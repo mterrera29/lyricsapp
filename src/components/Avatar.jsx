@@ -3,7 +3,7 @@ import { AuthContext } from '../context/AuthProvider';
 import unlogged from '../assets/unlogged.png';
 
 const Avatar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para el menú del avatar
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, login, logout } = useContext(AuthContext);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -11,7 +11,6 @@ const Avatar = () => {
 
   return (
     <>
-      {/* Avatar del usuario */}
       <div className='user-avatar' onClick={toggleMenu}>
         <img
           src={user?.photoURL || unlogged}
@@ -20,7 +19,6 @@ const Avatar = () => {
         />
       </div>
 
-      {/* Menú desplegable del avatar */}
       {isMenuOpen && (
         <div className='dropdown-menu'>
           {user ? (
