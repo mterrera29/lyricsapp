@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios'; // Asegúrate de tener axios instalado
-import { auth } from '../components/firebase'; // Importa la instancia de autenticación
+import axios from 'axios';
+import { auth } from '../components/firebase';
 import { useSongChanged } from '../context/SongProvider';
 
 const useEditedSong = (id, refetchSongs, refetchLists) => {
@@ -11,7 +11,7 @@ const useEditedSong = (id, refetchSongs, refetchLists) => {
   const { setIsOnSongChanged } = useSongChanged();
 
   useEffect(() => {
-    const user = auth.currentUser; // Usuario autenticado
+    const user = auth.currentUser;
 
     if (!user) {
       console.error('El usuario no está autenticado');
@@ -44,7 +44,7 @@ const useEditedSong = (id, refetchSongs, refetchLists) => {
   }, [id]);
 
   const handleSaveEdit = async () => {
-    const user = auth.currentUser; // Usuario autenticado
+    const user = auth.currentUser;
     const token = await user.getIdToken();
     if (!user) {
       console.error('El usuario no está autenticado');

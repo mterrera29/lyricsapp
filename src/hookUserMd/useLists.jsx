@@ -50,7 +50,7 @@ export default function useLists() {
       );
     } finally {
       setIsLoadingLists(false);
-      setIsFetchedLists(true); // Ya terminó la carga, aunque no haya canciones
+      setIsFetchedLists(true);
     }
   };
 

@@ -6,7 +6,7 @@ import { auth } from '../components/firebase';
 export default function useSongs() {
   const [songs, setSongs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isFetched, setIsFetched] = useState(false); // Nuevo estado
+  const [isFetched, setIsFetched] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function useSongs() {
         console.error('El usuario no está autenticado');
         setSongs([]);
         setIsLoading(false);
-        setIsFetched(true); // Se completó la carga, pero no hay usuario
+        setIsFetched(true);
       }
     });
 
@@ -28,7 +28,7 @@ export default function useSongs() {
 
     try {
       setIsLoading(true);
-      setIsFetched(false); // Aún no hemos terminado de cargar
+      setIsFetched(false);
 
       const token = await user.getIdToken();
       const response = await axios.get(
@@ -50,7 +50,7 @@ export default function useSongs() {
       );
     } finally {
       setIsLoading(false);
-      setIsFetched(true); // Ya terminó la carga, aunque no haya canciones
+      setIsFetched(true);
     }
   };
 

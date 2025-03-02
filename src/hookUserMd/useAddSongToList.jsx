@@ -19,7 +19,6 @@ const useAddSongToList = (refetchLists) => {
       setIsSubmitting(true);
       const token = await user.getIdToken();
 
-      // Enviar la solicitud al backend
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/users/${
           user.uid
@@ -35,7 +34,7 @@ const useAddSongToList = (refetchLists) => {
 
       if (response.status === 200) {
         console.log('✅ Canción agregada correctamente a la lista');
-        refetchLists(); // Refrescar listas después de la actualización
+        refetchLists();
         setIsOnSongChanged(true);
       }
     } catch (error) {

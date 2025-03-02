@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Cambiamos Firebase por Axios
-import { auth } from '../components/firebase'; // Importamos auth para obtener el usuario
+import axios from 'axios';
+import { auth } from '../components/firebase';
 import { useSongChanged } from '../context/SongProvider';
 
 const useDeleteSong = (refetchSongs, refetchLists, refetchListsSongs) => {
@@ -10,7 +10,7 @@ const useDeleteSong = (refetchSongs, refetchLists, refetchListsSongs) => {
   const navigate = useNavigate();
 
   const handleDelete = async (id) => {
-    const user = auth.currentUser; // Usuario autenticado
+    const user = auth.currentUser;
     const token = await user.getIdToken();
     if (!user) {
       console.error('El usuario no está autenticado');

@@ -43,7 +43,6 @@ const useFetchListSongs = (listId) => {
     }
   }, [listId]);
 
-  // Llamada inicial al montar el hook
   useEffect(() => {
     if (listId) fetchSongs();
   }, [fetchSongs, listId]);

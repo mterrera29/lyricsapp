@@ -8,7 +8,7 @@ const useDeleteList = (refetchLists, refetchSongs, refetchListsSongs) => {
   const navigate = useNavigate();
 
   const handleDeleteList = async (id) => {
-    const user = auth.currentUser; // Usuario autenticado
+    const user = auth.currentUser;
     const token = await user.getIdToken();
     if (!user) {
       console.error('El usuario no está autenticado');

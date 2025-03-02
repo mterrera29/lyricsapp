@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth } from '../components/firebase';
-import axios from 'axios'; // Usamos axios para hacer las solicitudes HTTP
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { useSongChanged } from '../context/SongProvider';
 

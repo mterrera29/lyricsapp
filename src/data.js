@@ -15,7 +15,6 @@ export const genres = [
   'Bolero',
 ];
 
-// Configurar los módulos de Quill para incluir las opciones de formateo
 export const modules = {
   toolbar: [
     [{ size: [] }],
@@ -33,5 +32,5 @@ export const formats = [
   'underline',
   'color',
   'background',
-  'align', // Habilitar line-height
+  'align',
 ];

@@ -40,7 +40,6 @@ const useCreateList = (setLists, refetchLists) => {
       if (response.status === 201) {
         console.log('Lista guardada exitosamente en MongoDB');
 
-        // Agregar la nueva canción al estado local
         setLists((prevLists) => [...prevLists, listData]);
         refetchLists();
         setIsOnSongChanged(true);

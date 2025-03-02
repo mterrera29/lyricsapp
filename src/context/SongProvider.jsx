@@ -23,5 +23,4 @@ export const SongProvider = ({ children }) => {
   );
 };
 
-// Hook para acceder al contexto en cualquier parte de la app
 export const useSongChanged = () => useContext(SongContext);
