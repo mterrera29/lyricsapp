@@ -83,8 +83,6 @@ const Header = () => {
           </ul>
         </nav>
       </div>
-
-      {/* Título */}
       <div className='title-container'>
         <h2
           className='title'
@@ -95,9 +93,7 @@ const Header = () => {
           🔥 Cancionero 🎸
         </h2>
       </div>
-
       <Avatar />
-      {/* Modal */}
       {isModalOpen && (
         <div className='modal-overlay'>
           <div className='modal-content'>

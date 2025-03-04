@@ -20,7 +20,7 @@ export const modules = {
     [{ size: [] }],
     ['bold', 'italic', 'underline'],
     [{ color: [] }, { background: [] }],
-    [{ align: [] }], // Opción para line-height
+    [{ align: [] }],
     ['clean'],
   ],
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { db } from '../components/firebase'; // Importa tu configuración de Firebase
+import { db } from '../components/firebase';
 
 const useDeleteSong = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
