@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../components/firebase'; // Asegúrate de importar tu configuración de Firebase
+import { db } from '../components/firebase';
 
 const useCreateSong = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -9,11 +9,11 @@ const useCreateSong = () => {
     try {
       setIsSubmitting(true);
       const docRef = await addDoc(collection(db, 'songs'), newSong);
-      const songWithId = { id: docRef.id, ...newSong }; // Agregar el ID al objeto de la canción
-      return songWithId; // Retornar el objeto con ID
+      const songWithId = { id: docRef.id, ...newSong };
+      return songWithId;
     } catch (error) {
       console.error('Error al agregar la canción:', error);
-      throw error; // Propagar el error
+      throw error;
     } finally {
       setIsSubmitting(false);
     }
