@@ -1,8 +1,27 @@
-# React + Vite
+# 🎵 LyricsApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web que permite a los usuarios buscar letras de canciones y guardarlas en su cuenta. Utiliza **React** en el frontend, **Firebase Authentication** para el login y **MongoDB** como base de datos para gestionar las canciones.
 
-Currently, two official plugins are available:
+## 🚀 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔍 Búsqueda de letras de canciones por artista y título  
+- 👤 Autenticación de usuarios con Firebase (email/password)  
+- 💾 Guardado y visualización de canciones favoritas  
+- 📦 Backend en Node.js con Express y MongoDB  
+- 🌐 Consumo de APIs externas para obtener letras  
+
+## 🛠️ Tecnologías utilizadas
+
+### Frontend
+
+- React  
+- Firebase Authentication  
+- Axios  
+- Tailwind CSS (opcional)  
+
+### Backend
+
+- Node.js  
+- Express  
+- MongoDB + Mongoose  
+- Dotenv  
